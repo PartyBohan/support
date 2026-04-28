@@ -56,7 +56,8 @@
   @media (prefers-color-scheme: dark) { .topbar { background: rgba(10,10,12,0.75); } }
   .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: var(--text-2); }
   .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; color: var(--text); }
-  .brand-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--brand-grad); flex-shrink: 0; box-shadow: 0 2px 8px rgba(155,91,255,0.25); }
+  .brand-mark { width: 24px; height: 24px; flex-shrink: 0; display: inline-block; }
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
   .topbar nav { display: flex; gap: 22px; align-items: center; }
   .topbar nav a { color: var(--text-2); transition: color 0.15s var(--easing); }
   .topbar nav a:hover { color: var(--text); }
@@ -78,24 +79,43 @@
   .hero h1 { font-size: clamp(44px, 7vw, 72px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin: 0 0 20px; background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .hero .subtitle { font-size: 19px; color: var(--muted); margin: 0 auto 44px; max-width: 540px; line-height: 1.5; }
 
-  .search-shell { max-width: 580px; margin: 0 auto; }
-  .search-box { position: relative; transition: transform 0.3s var(--easing); }
-  .search-box input { width: 100%; height: 60px; padding: 0 24px 0 56px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--surface); font-size: 17px; color: var(--text); outline: none; transition: all 0.25s var(--easing); font-family: inherit; letter-spacing: -0.01em; }
+  .search-shell { max-width: 600px; margin: 0 auto; }
+  .search-box { position: relative; padding: 2px; border-radius: 999px; background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--orange) 100%); background-size: 200% 200%; animation: borderShift 8s ease-in-out infinite; box-shadow: 0 12px 36px rgba(74,111,255,0.10), 0 4px 14px rgba(255,138,76,0.08); }
+  @keyframes borderShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  .search-box input { width: 100%; height: 60px; padding: 0 78px 0 54px; border: none; border-radius: 999px; background: var(--surface); font-size: 17px; color: var(--text); outline: none; transition: box-shadow 0.25s var(--easing); font-family: inherit; letter-spacing: -0.01em; }
   .search-box input::placeholder { color: var(--muted); }
-  .search-box input:focus { border-color: transparent; box-shadow: 0 0 0 2px var(--purple), var(--shadow-brand); }
-  .search-box .icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; display: flex; }
-  .popular-chips { margin-top: 18px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .search-box input:focus { box-shadow: inset 0 0 0 0.5px var(--hairline-soft); }
+  .search-box:focus-within { box-shadow: 0 18px 46px rgba(74,111,255,0.18), 0 6px 20px rgba(255,138,76,0.14); transform: translateY(-1px); transition: all 0.2s var(--easing); }
+  .search-box .icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); pointer-events: none; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; }
+  .search-box .icon svg { width: 22px; height: 22px; }
+  .ai-badge { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 5px; padding: 6px 11px 6px 9px; background: linear-gradient(135deg, var(--blue), var(--purple), var(--orange)); color: white; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; border-radius: 999px; pointer-events: none; box-shadow: 0 4px 12px rgba(155,91,255,0.25); }
+  .ai-badge svg { width: 11px; height: 11px; }
+  .popular-chips { margin-top: 16px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
   .chip { padding: 7px 14px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--surface); font-size: 13.5px; color: var(--text-2); cursor: pointer; transition: all 0.15s var(--easing); font-family: inherit; }
-  .chip:hover { border-color: var(--purple); color: var(--text); transform: translateY(-1px); }
+  .chip:hover { border-color: var(--blue); color: var(--text); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(74,111,255,0.12); }
+  .chip:nth-child(2):hover { border-color: var(--orange); box-shadow: 0 4px 14px rgba(255,138,76,0.18); }
+  .chip:nth-child(3):hover { border-color: var(--purple); box-shadow: 0 4px 14px rgba(155,91,255,0.18); }
+  .chip:nth-child(4):hover { border-color: var(--blue); box-shadow: 0 4px 14px rgba(74,111,255,0.18); }
+  .chip:nth-child(5):hover { border-color: var(--orange); box-shadow: 0 4px 14px rgba(255,138,76,0.18); }
 
   /* QUICK CATEGORIES */
   .quick-cats { max-width: 1080px; margin: 32px auto 0; padding: 0 24px; }
   .quick-cats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
   .qc-card { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--hairline-soft); border-radius: var(--radius-md); background: var(--surface); text-align: left; transition: all 0.2s var(--easing); cursor: pointer; }
-  .qc-card:hover { border-color: var(--purple); transform: translateY(-2px); box-shadow: var(--shadow-brand); }
-  .qc-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--text); display: flex; align-items: center; justify-content: center; }
+  .qc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .qc-card:nth-child(8n+1):hover { border-color: var(--blue); box-shadow: 0 12px 36px rgba(74,111,255,0.18); }
+  .qc-card:nth-child(8n+2):hover { border-color: var(--purple); box-shadow: 0 12px 36px rgba(155,91,255,0.18); }
+  .qc-card:nth-child(8n+3):hover { border-color: var(--orange); box-shadow: 0 12px 36px rgba(255,138,76,0.18); }
+  .qc-card:nth-child(8n+4):hover { border-color: var(--blue); box-shadow: 0 12px 36px rgba(74,111,255,0.18); }
+  .qc-card:nth-child(8n+5):hover { border-color: var(--orange); box-shadow: 0 12px 36px rgba(255,138,76,0.18); }
+  .qc-card:nth-child(8n+6):hover { border-color: var(--purple); box-shadow: 0 12px 36px rgba(155,91,255,0.18); }
+  .qc-card:nth-child(8n+7):hover { border-color: var(--blue); box-shadow: 0 12px 36px rgba(74,111,255,0.18); }
+  .qc-card:nth-child(8n+8):hover { border-color: var(--orange); box-shadow: 0 12px 36px rgba(255,138,76,0.18); }
+  .qc-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--text); display: flex; align-items: center; justify-content: center; transition: color 0.2s var(--easing); }
   .qc-icon svg { width: 100%; height: 100%; }
-  .qc-card:hover .qc-icon { color: var(--purple); }
+  .qc-card:nth-child(8n+1):hover .qc-icon, .qc-card:nth-child(8n+4):hover .qc-icon, .qc-card:nth-child(8n+7):hover .qc-icon { color: var(--blue); }
+  .qc-card:nth-child(8n+2):hover .qc-icon, .qc-card:nth-child(8n+6):hover .qc-icon { color: var(--purple); }
+  .qc-card:nth-child(8n+3):hover .qc-icon, .qc-card:nth-child(8n+5):hover .qc-icon, .qc-card:nth-child(8n+8):hover .qc-icon { color: var(--orange); }
   .qc-label { font-size: 14.5px; font-weight: 500; line-height: 1.3; }
 
   /* MOST ASKED (TOP 10) */
@@ -256,6 +276,51 @@
     .search-hint { font-size: 12px; }
   }
 
+  /* CONTACT MODAL */
+  .contact-overlay { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .contact-overlay.show { display: flex; }
+  .contact-overlay::before { content: ''; position: absolute; inset: 0; background: rgba(13, 13, 18, 0.45); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: bdIn 0.3s var(--easing); }
+  @keyframes bdIn { from { opacity: 0; } to { opacity: 1; } }
+  .contact-dialog { position: relative; background: var(--surface); border-radius: var(--radius-lg); max-width: 480px; width: 100%; max-height: 90vh; overflow: auto; box-shadow: 0 32px 80px rgba(0,0,0,0.25); animation: dlgIn 0.35s var(--easing); }
+  @keyframes dlgIn { from { opacity: 0; transform: translateY(16px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .contact-dialog::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-grad); border-radius: 28px 28px 0 0; }
+  .contact-header { padding: 28px 28px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .contact-header h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 4px; }
+  .contact-header p { color: var(--muted); font-size: 14.5px; margin: 0 0 16px; line-height: 1.5; }
+  .contact-x { width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--hairline-soft); background: var(--surface); cursor: pointer; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s var(--easing); flex-shrink: 0; }
+  .contact-x:hover { border-color: var(--text); color: var(--text); }
+  .contact-form { padding: 0 28px 28px; }
+  .contact-form .row { margin-bottom: 14px; }
+  .contact-form label { display: block; font-size: 13px; font-weight: 500; color: var(--text-2); margin-bottom: 6px; }
+  .contact-form label .opt { color: var(--muted); font-weight: 400; font-size: 12.5px; margin-left: 4px; }
+  .contact-form input, .contact-form textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--hairline); border-radius: 10px; background: var(--surface); font-size: 15px; color: var(--text); font-family: inherit; outline: none; transition: border-color 0.15s var(--easing), box-shadow 0.15s var(--easing); }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: transparent; box-shadow: 0 0 0 2px var(--purple); }
+  .contact-form textarea { min-height: 120px; resize: vertical; line-height: 1.55; }
+  .contact-form .honeypot { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  .contact-submit { width: 100%; padding: 14px; border: none; border-radius: 12px; background: var(--brand-grad); color: white; font-size: 15.5px; font-weight: 500; cursor: pointer; font-family: inherit; transition: transform 0.15s var(--easing), box-shadow 0.15s var(--easing), opacity 0.15s var(--easing); display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: var(--shadow-brand); }
+  .contact-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 16px 40px rgba(155,91,255,0.30); }
+  .contact-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+  .contact-submit .mini-spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; display: none; }
+  .contact-submit.loading .mini-spinner { display: inline-block; }
+  .contact-submit.loading .submit-label::after { content: '…'; }
+  .contact-message { padding: 12px 14px; border-radius: 10px; font-size: 14px; margin-bottom: 14px; display: none; }
+  .contact-message.error { background: rgba(255,138,76,0.10); border: 1px solid rgba(255,138,76,0.25); color: #B45309; display: block; }
+  @media (prefers-color-scheme: dark) { .contact-message.error { color: #FBBF24; } }
+  .contact-success { padding: 36px 28px 28px; text-align: center; display: none; }
+  .contact-success.show { display: block; }
+  .contact-success-icon { width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; background: var(--brand-grad); display: flex; align-items: center; justify-content: center; color: white; box-shadow: var(--shadow-brand); }
+  .contact-success h3 { margin: 0 0 8px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .contact-success p { color: var(--muted); font-size: 14.5px; margin: 0 0 22px; line-height: 1.5; }
+  .contact-success-btn { padding: 10px 22px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface); color: var(--text); font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.15s var(--easing); }
+  .contact-success-btn:hover { border-color: var(--text); }
+  .contact-fineprint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; text-align: center; }
+  @media (max-width: 540px) {
+    .contact-overlay { padding: 12px; }
+    .contact-dialog { border-radius: 22px; }
+    .contact-header { padding: 22px 22px 0; }
+    .contact-form { padding: 0 22px 22px; }
+  }
+
   @media (max-width: 720px) {
     .hero { padding: 60px 20px 48px; }
     .hero .subtitle { font-size: 17px; margin-bottom: 32px; }
@@ -281,7 +346,22 @@
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-inner">
-    <a href="#top" class="brand"><span class="brand-mark"></span> PartyKeys</a>
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <defs>
+          <linearGradient id="logoG" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#5DD8FF"/>
+            <stop offset="33%" stop-color="#9B5BFF"/>
+            <stop offset="66%" stop-color="#FF6B9D"/>
+            <stop offset="100%" stop-color="#FF8A4C"/>
+          </linearGradient>
+        </defs>
+        <path d="M30 8 A 22 22 0 1 0 56 34" stroke="url(#logoG)" stroke-width="6" stroke-linecap="round"/>
+        <rect x="30" y="6" width="28" height="28" rx="6.5" stroke="url(#logoG)" stroke-width="6"/>
+        <circle cx="58" cy="56" r="4.5" fill="url(#logoG)"/>
+      </svg></span>
+      PartyKeys
+    </a>
     <nav>
       <a href="#partykeys" class="hide-mobile" data-i18n="nav.keys">PartyKeys</a>
       <a href="#partystudio" class="hide-mobile" data-i18n="nav.studio">PartyStudio</a>
@@ -317,8 +397,18 @@
   <p class="subtitle" data-i18n="hero.subtitle">Quick answers about your PartyKeys, PartyStudio, the PopuMusic app, setup, and warranty.</p>
   <div class="search-shell">
     <div class="search-box">
-      <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-      <input id="search" type="text" placeholder="Search support" data-i18n-attr="placeholder" data-i18n="search.placeholder" autocomplete="off" />
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="sparkG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4A6FFF"/><stop offset="50%" stop-color="#9B5BFF"/><stop offset="100%" stop-color="#FF8A4C"/></linearGradient></defs>
+          <path d="M12 2.5l1.9 5.7 5.7 1.9-5.7 1.9-1.9 5.7-1.9-5.7-5.7-1.9 5.7-1.9z" fill="url(#sparkG)"/>
+          <path d="M19 14l.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7z" fill="url(#sparkG)" opacity="0.7"/>
+        </svg>
+      </span>
+      <input id="search" type="text" placeholder="Ask anything about PartyKeys…" data-i18n-attr="placeholder" data-i18n="search.placeholder" autocomplete="off" />
+      <span class="ai-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 4l1.5 4.5L17 10l-4.5 1.5L11 16l-1.5-4.5L5 10l4.5-1.5z"/></svg>
+        <span>AI</span>
+      </span>
     </div>
     <div class="popular-chips">
       <button class="chip" data-q="bluetooth" data-i18n="chip.bluetooth">Bluetooth</button>
@@ -328,10 +418,9 @@
       <button class="chip" data-q="drum" data-i18n="chip.drum">Drum machine</button>
     </div>
     <div class="search-hint">
-      <span class="sparkle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.3L12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg></span>
       <span data-i18n="search.hint">Press</span>
       <kbd>Enter</kbd>
-      <span data-i18n="search.hint2">to ask AI · type to filter</span>
+      <span data-i18n="search.hint2">for instant AI answer · or type to filter the FAQ</span>
     </div>
   </div>
 </header>
@@ -789,16 +878,64 @@
   <p class="legal" data-i18n="footer.legal">© PartyKeys, made by PopuMusic. Last updated <span id="last-updated">2026</span>. Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> for any feedback.</p>
 </footer>
 
-<a href="mailto:support@partykeys.com" class="floating-contact" id="floating-contact" aria-label="Email support">
+<a href="mailto:support@partykeys.com" class="floating-contact" id="floating-contact" aria-label="Contact support">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
 </a>
+
+<!-- CONTACT MODAL -->
+<div class="contact-overlay" id="contact-overlay" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <div class="contact-dialog">
+    <div class="contact-header">
+      <div>
+        <h3 id="contact-title" data-i18n="contact.title">Contact support</h3>
+        <p data-i18n="contact.desc">Send us a message and we'll reply to your email within 24 hours.</p>
+      </div>
+      <button class="contact-x" id="contact-x" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="contact-message" id="contact-error"></div>
+      <div class="row">
+        <label for="cf-email" data-i18n="contact.emailLabel">Your email <span class="opt">(we'll reply here)</span></label>
+        <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+      </div>
+      <div class="row">
+        <label for="cf-subject" data-i18n="contact.subjectLabel">Subject <span class="opt">(optional)</span></label>
+        <input id="cf-subject" name="subject" type="text" autocomplete="off" placeholder="Support inquiry" />
+      </div>
+      <div class="row">
+        <label for="cf-order" data-i18n="contact.orderLabel">Order number <span class="opt">(if applicable)</span></label>
+        <input id="cf-order" name="orderId" type="text" autocomplete="off" placeholder="From your purchase confirmation" />
+      </div>
+      <div class="row">
+        <label for="cf-message" data-i18n="contact.messageLabel">Message</label>
+        <textarea id="cf-message" name="message" required minlength="10" placeholder="What's going on? Include any error messages and what you've already tried…"></textarea>
+      </div>
+      <div class="honeypot" aria-hidden="true"><label>Website (leave blank)<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+      <button type="submit" class="contact-submit" id="contact-submit">
+        <span class="mini-spinner"></span>
+        <span class="submit-label" data-i18n="contact.send">Send message</span>
+      </button>
+      <p class="contact-fineprint" data-i18n="contact.fineprint">Goes directly to support@partykeys.com. We typically reply within 24 hours.</p>
+    </form>
+    <div class="contact-success" id="contact-success">
+      <div class="contact-success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 data-i18n="contact.successTitle">Message sent!</h3>
+      <p data-i18n="contact.successDesc">We received your message and will reply to your email within 24 hours.</p>
+      <button class="contact-success-btn" id="contact-success-close" data-i18n="contact.successBtn">Close</button>
+    </div>
+  </div>
+</div>
 
 <script>
 window.I18N = {
 "zh-CN": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保修",
 "hero.eyebrow":"PartyKeys 客户支持","hero.title":"有什么可以帮你？","hero.subtitle":"关于 PartyKeys、PartyStudio、PopuMusic App、连接和保修的快速答疑。",
-"search.placeholder":"搜索问题",
+"search.placeholder":"问 AI 任何关于 PartyKeys 的问题…",
 "chip.bluetooth":"蓝牙","chip.charging":"充电","chip.return":"退货","chip.compat":"机型兼容","chip.drum":"鼓机",
 "qc.start":"快速上手","qc.keys":"PartyKeys 键盘","qc.studio":"PartyStudio 音响","qc.app":"PopuMusic App","qc.trouble":"故障排查","qc.warranty":"保修与退货","qc.account":"账号","qc.gen1":"PopuPiano 老用户",
 "popular.title":"热门问题","popular.badge":"TOP 10",
@@ -817,8 +954,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys，由 PopuMusic 出品。最后更新 <span id=\"last-updated\">2026</span>。反馈请发 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
 "fb.helpful":"这个回答有用吗？","fb.thanks":"感谢你的反馈。",
 "banner.autotrans":"机器辅助翻译，欢迎指正：support@partykeys.com",
-"search.hint":"按","search.hint2":"提问 AI · 输入即过滤",
+"search.hint":"按","search.hint2":"获得 AI 即时回答 · 或输入关键词过滤 FAQ",
 "ask.sources":"参考来源","ask.related":"相关问题","ask.helpful":"这个回答有帮助吗？","ask.thanks":"感谢反馈。","ask.close":"关闭","ask.thinking":"思考中…",
+"contact.title":"联系客服","contact.desc":"给我们留言,我们会在 24 小时内回复你的邮箱。",
+"contact.emailLabel":"你的邮箱 <span class=\"opt\">(我们会回复到这里)</span>","contact.subjectLabel":"主题 <span class=\"opt\">(可选)</span>","contact.orderLabel":"订单号 <span class=\"opt\">(如果有)</span>","contact.messageLabel":"留言",
+"contact.send":"发送留言","contact.fineprint":"留言会直接发到 support@partykeys.com,通常 24 小时内回复。",
+"contact.successTitle":"留言已发送!","contact.successDesc":"我们已收到你的留言,24 小时内回复到你的邮箱。","contact.successBtn":"关闭",
 "qa.bt-fail.q":"PartyKeys 蓝牙连不上",
 "qa.bt-fail.a":"<p>请按顺序排查：</p><ol><li>从 <strong>PopuMusic App</strong> 内连接，<strong>不要</strong>从手机系统蓝牙设置里连。多数手机的系统蓝牙列表里看不到 BLE MIDI 设备。</li><li>确认 PartyKeys 已开机：长按电源键 3 秒，琴键呈彩色呼吸状=待配对。</li><li>电量低时请充电后再试。</li><li>断开占用蓝牙信道的耳机/音响等设备，关闭再打开蓝牙重试。</li><li><strong>仅安卓</strong>：开启定位服务并允许 PopuMusic App 使用位置权限。蓝牙 MIDI 扫描需要这个权限。</li></ol>",
 "qa.battery.q":"电池能用多久？怎么充电？",
@@ -969,7 +1110,7 @@ window.I18N = {
 "zh-TW": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保固",
 "hero.eyebrow":"PartyKeys 客戶支援","hero.title":"有什麼可以幫你？","hero.subtitle":"關於 PartyKeys、PartyStudio、PopuMusic App、連線與保固的快速解答。",
-"search.placeholder":"搜尋問題",
+"search.placeholder":"問 AI 任何關於 PartyKeys 的問題…",
 "chip.bluetooth":"藍牙","chip.charging":"充電","chip.return":"退貨","chip.compat":"機型相容","chip.drum":"鼓機",
 "qc.start":"快速上手","qc.keys":"PartyKeys 鍵盤","qc.studio":"PartyStudio 喇叭","qc.app":"PopuMusic App","qc.trouble":"故障排除","qc.warranty":"保固與退貨","qc.account":"帳號","qc.gen1":"PopuPiano 老用戶",
 "popular.title":"熱門問題","popular.badge":"TOP 10",
@@ -988,8 +1129,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys，由 PopuMusic 出品。最後更新 <span id=\"last-updated\">2026</span>。意見回饋：<a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
 "fb.helpful":"這個回答有幫助嗎？","fb.thanks":"感謝你的回饋。",
 "banner.autotrans":"機器輔助翻譯，歡迎指正：support@partykeys.com",
-"search.hint":"按","search.hint2":"向 AI 提問 · 輸入即時過濾",
+"search.hint":"按","search.hint2":"獲得 AI 即時解答 · 或輸入關鍵字過濾 FAQ",
 "ask.sources":"參考來源","ask.related":"相關問題","ask.helpful":"這個回答有幫助嗎？","ask.thanks":"感謝回饋。","ask.close":"關閉","ask.thinking":"思考中…",
+"contact.title":"聯絡客服","contact.desc":"給我們留言,我們會在 24 小時內回覆你的信箱。",
+"contact.emailLabel":"你的信箱 <span class=\"opt\">(我們會回覆到這裡)</span>","contact.subjectLabel":"主旨 <span class=\"opt\">(選填)</span>","contact.orderLabel":"訂單號 <span class=\"opt\">(如有)</span>","contact.messageLabel":"訊息",
+"contact.send":"送出訊息","contact.fineprint":"訊息會直接寄到 support@partykeys.com,通常 24 小時內回覆。",
+"contact.successTitle":"訊息已送出!","contact.successDesc":"我們已收到你的訊息,24 小時內回覆到你的信箱。","contact.successBtn":"關閉",
 "qa.bt-fail.q":"PartyKeys 藍牙連不上",
 "qa.battery.q":"電池能用多久？怎麼充電？",
 "qa.app-devices.q":"App 支援哪些裝置？",
@@ -1004,7 +1149,7 @@ window.I18N = {
 "es": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantía",
 "hero.eyebrow":"Soporte de PartyKeys","hero.title":"¿Cómo podemos ayudarte?","hero.subtitle":"Respuestas rápidas sobre tu PartyKeys, PartyStudio, la app PopuMusic, configuración y garantía.",
-"search.placeholder":"Buscar ayuda",
+"search.placeholder":"Pregunta a la IA sobre PartyKeys…",
 "chip.bluetooth":"Bluetooth","chip.charging":"Carga","chip.return":"Devoluciones","chip.compat":"Compatibilidad","chip.drum":"Caja de ritmos",
 "qc.start":"Inicio rápido","qc.keys":"Teclado PartyKeys","qc.studio":"Altavoz PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Solución de problemas","qc.warranty":"Garantía y devoluciones","qc.account":"Cuenta","qc.gen1":"Usuarios de PopuPiano",
 "popular.title":"Más consultadas","popular.badge":"TOP 10",
@@ -1023,8 +1168,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, por PopuMusic. Última actualización <span id=\"last-updated\">2026</span>. Comentarios: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"¿Te resultó útil?","fb.thanks":"Gracias por tus comentarios.",
 "banner.autotrans":"Traducción automática asistida. Correcciones bienvenidas en support@partykeys.com.",
-"search.hint":"Pulsa","search.hint2":"para preguntar a la IA · escribe para filtrar",
+"search.hint":"Pulsa","search.hint2":"para una respuesta instantánea de la IA · o escribe para filtrar el FAQ",
 "ask.sources":"Fuentes","ask.related":"Preguntas relacionadas","ask.helpful":"¿Te ha sido útil?","ask.thanks":"Gracias por tus comentarios.","ask.close":"Cerrar","ask.thinking":"Pensando…",
+"contact.title":"Contactar soporte","contact.desc":"Envíanos un mensaje y responderemos a tu correo en 24 horas.",
+"contact.emailLabel":"Tu correo <span class=\"opt\">(te responderemos aquí)</span>","contact.subjectLabel":"Asunto <span class=\"opt\">(opcional)</span>","contact.orderLabel":"Número de pedido <span class=\"opt\">(si aplica)</span>","contact.messageLabel":"Mensaje",
+"contact.send":"Enviar mensaje","contact.fineprint":"Va directamente a support@partykeys.com. Respondemos en 24 horas.",
+"contact.successTitle":"¡Mensaje enviado!","contact.successDesc":"Recibimos tu mensaje y responderemos a tu correo en 24 horas.","contact.successBtn":"Cerrar",
 "qa.bt-fail.q":"PartyKeys no conecta por Bluetooth",
 "qa.battery.q":"¿Cuánto dura la batería y cómo se carga?",
 "qa.app-devices.q":"¿Qué dispositivos admite la app?",
@@ -1039,7 +1188,7 @@ window.I18N = {
 "fr": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantie",
 "hero.eyebrow":"Assistance PartyKeys","hero.title":"Comment pouvons-nous vous aider ?","hero.subtitle":"Réponses rapides sur PartyKeys, PartyStudio, l'application PopuMusic, l'installation et la garantie.",
-"search.placeholder":"Rechercher",
+"search.placeholder":"Demandez à l'IA tout sur PartyKeys…",
 "chip.bluetooth":"Bluetooth","chip.charging":"Charge","chip.return":"Retours","chip.compat":"Compatibilité","chip.drum":"Boîte à rythmes",
 "qc.start":"Démarrage rapide","qc.keys":"Clavier PartyKeys","qc.studio":"Enceinte PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Dépannage","qc.warranty":"Garantie et retours","qc.account":"Compte","qc.gen1":"Utilisateurs PopuPiano",
 "popular.title":"Questions fréquentes","popular.badge":"TOP 10",
@@ -1058,8 +1207,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, par PopuMusic. Dernière mise à jour <span id=\"last-updated\">2026</span>. Commentaires : <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"Cette réponse vous a-t-elle aidé ?","fb.thanks":"Merci pour votre retour.",
 "banner.autotrans":"Traduction assistée par IA. Corrections bienvenues à support@partykeys.com.",
-"search.hint":"Appuyez sur","search.hint2":"pour demander à l'IA · saisissez pour filtrer",
+"search.hint":"Appuyez sur","search.hint2":"pour une réponse instantanée de l'IA · ou saisissez pour filtrer la FAQ",
 "ask.sources":"Sources","ask.related":"Questions associées","ask.helpful":"Cette réponse vous a-t-elle aidé ?","ask.thanks":"Merci pour votre retour.","ask.close":"Fermer","ask.thinking":"Réflexion…",
+"contact.title":"Contacter le support","contact.desc":"Envoyez-nous un message ; nous répondons à votre e-mail sous 24 heures.",
+"contact.emailLabel":"Votre e-mail <span class=\"opt\">(nous y répondrons)</span>","contact.subjectLabel":"Sujet <span class=\"opt\">(facultatif)</span>","contact.orderLabel":"Numéro de commande <span class=\"opt\">(le cas échéant)</span>","contact.messageLabel":"Message",
+"contact.send":"Envoyer","contact.fineprint":"Envoyé directement à support@partykeys.com. Réponse sous 24 heures.",
+"contact.successTitle":"Message envoyé !","contact.successDesc":"Nous avons bien reçu votre message et répondrons sous 24 heures.","contact.successBtn":"Fermer",
 "qa.bt-fail.q":"PartyKeys ne se connecte pas en Bluetooth",
 "qa.battery.q":"Quelle est l'autonomie et comment charger ?",
 "qa.app-devices.q":"Quels appareils l'app prend-elle en charge ?",
@@ -1074,7 +1227,7 @@ window.I18N = {
 "de": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantie",
 "hero.eyebrow":"PartyKeys Support","hero.title":"Wie können wir helfen?","hero.subtitle":"Schnelle Antworten zu PartyKeys, PartyStudio, der PopuMusic-App, Einrichtung und Garantie.",
-"search.placeholder":"Hilfe durchsuchen",
+"search.placeholder":"Frag die KI alles über PartyKeys…",
 "chip.bluetooth":"Bluetooth","chip.charging":"Aufladen","chip.return":"Rücksendung","chip.compat":"Kompatibilität","chip.drum":"Drum-Machine",
 "qc.start":"Schnellstart","qc.keys":"PartyKeys Keyboard","qc.studio":"PartyStudio Lautsprecher","qc.app":"PopuMusic App","qc.trouble":"Fehlerbehebung","qc.warranty":"Garantie und Rückgabe","qc.account":"Konto","qc.gen1":"PopuPiano-Besitzer",
 "popular.title":"Häufig gefragt","popular.badge":"TOP 10",
@@ -1093,8 +1246,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, von PopuMusic. Zuletzt aktualisiert <span id=\"last-updated\">2026</span>. Feedback: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"War das hilfreich?","fb.thanks":"Danke für dein Feedback.",
 "banner.autotrans":"Maschinenunterstützte Übersetzung. Korrekturen willkommen unter support@partykeys.com.",
-"search.hint":"Drücke","search.hint2":"um die KI zu fragen · tippen zum Filtern",
+"search.hint":"Drücke","search.hint2":"für eine sofortige KI-Antwort · oder tippen, um die FAQ zu filtern",
 "ask.sources":"Quellen","ask.related":"Verwandte Fragen","ask.helpful":"War das hilfreich?","ask.thanks":"Danke für dein Feedback.","ask.close":"Schließen","ask.thinking":"Denke nach…",
+"contact.title":"Support kontaktieren","contact.desc":"Schick uns eine Nachricht – wir antworten innerhalb von 24 Stunden per E-Mail.",
+"contact.emailLabel":"Deine E-Mail <span class=\"opt\">(wir antworten hier)</span>","contact.subjectLabel":"Betreff <span class=\"opt\">(optional)</span>","contact.orderLabel":"Bestellnummer <span class=\"opt\">(falls vorhanden)</span>","contact.messageLabel":"Nachricht",
+"contact.send":"Senden","contact.fineprint":"Geht direkt an support@partykeys.com. Antwort innerhalb von 24 Stunden.",
+"contact.successTitle":"Nachricht gesendet!","contact.successDesc":"Wir haben deine Nachricht erhalten und antworten innerhalb von 24 Stunden.","contact.successBtn":"Schließen",
 "qa.bt-fail.q":"PartyKeys verbindet sich nicht via Bluetooth",
 "qa.battery.q":"Wie lange hält der Akku und wie lade ich ihn?",
 "qa.app-devices.q":"Welche Geräte unterstützt die App?",
@@ -1109,7 +1266,7 @@ window.I18N = {
 "ja": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保証",
 "hero.eyebrow":"PartyKeys サポート","hero.title":"何かお手伝いできることはありますか？","hero.subtitle":"PartyKeys、PartyStudio、PopuMusic アプリ、セットアップ、保証についての解答。",
-"search.placeholder":"ヘルプを検索",
+"search.placeholder":"PartyKeys について AI に質問…",
 "chip.bluetooth":"Bluetooth","chip.charging":"充電","chip.return":"返品","chip.compat":"対応機種","chip.drum":"ドラムマシン",
 "qc.start":"クイックスタート","qc.keys":"PartyKeys キーボード","qc.studio":"PartyStudio スピーカー","qc.app":"PopuMusic アプリ","qc.trouble":"トラブルシューティング","qc.warranty":"保証と返品","qc.account":"アカウント","qc.gen1":"PopuPiano ユーザー向け",
 "popular.title":"よくある質問","popular.badge":"TOP 10",
@@ -1128,8 +1285,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys、PopuMusic 製。最終更新 <span id=\"last-updated\">2026</span>。フィードバック：<a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
 "fb.helpful":"この回答は役に立ちましたか？","fb.thanks":"フィードバックありがとうございます。",
 "banner.autotrans":"機械支援による翻訳です。修正提案歓迎：support@partykeys.com",
-"search.hint":"","search.hint2":"を押して AI に質問 · 入力で絞り込み",
+"search.hint":"","search.hint2":"を押して AI から即時回答 · 入力で FAQ を絞り込み",
 "ask.sources":"参考元","ask.related":"関連する質問","ask.helpful":"この回答は役に立ちましたか？","ask.thanks":"フィードバックありがとうございます。","ask.close":"閉じる","ask.thinking":"考え中…",
+"contact.title":"サポートに問い合わせる","contact.desc":"メッセージをお送りください。24 時間以内にメールで返信します。",
+"contact.emailLabel":"メールアドレス <span class=\"opt\">(こちらに返信します)</span>","contact.subjectLabel":"件名 <span class=\"opt\">(任意)</span>","contact.orderLabel":"注文番号 <span class=\"opt\">(該当する場合)</span>","contact.messageLabel":"メッセージ",
+"contact.send":"送信","contact.fineprint":"support@partykeys.com に直接送信されます。24 時間以内に返信します。",
+"contact.successTitle":"送信されました!","contact.successDesc":"メッセージを受け取りました。24 時間以内にメールで返信します。","contact.successBtn":"閉じる",
 "qa.bt-fail.q":"PartyKeys が Bluetooth に接続できない",
 "qa.battery.q":"バッテリーの持続時間と充電方法は？",
 "qa.app-devices.q":"アプリは何の端末に対応していますか？",
@@ -1144,7 +1305,7 @@ window.I18N = {
 "ko": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"앱","nav.warranty":"보증",
 "hero.eyebrow":"PartyKeys 고객 지원","hero.title":"무엇을 도와드릴까요?","hero.subtitle":"PartyKeys, PartyStudio, PopuMusic 앱, 설정, 보증에 관한 빠른 답변.",
-"search.placeholder":"도움말 검색",
+"search.placeholder":"PartyKeys 에 대해 AI 에게 질문…",
 "chip.bluetooth":"블루투스","chip.charging":"충전","chip.return":"반품","chip.compat":"호환 기기","chip.drum":"드럼 머신",
 "qc.start":"빠른 시작","qc.keys":"PartyKeys 키보드","qc.studio":"PartyStudio 스피커","qc.app":"PopuMusic 앱","qc.trouble":"문제 해결","qc.warranty":"보증 및 반품","qc.account":"계정","qc.gen1":"PopuPiano 사용자",
 "popular.title":"많이 묻는 질문","popular.badge":"TOP 10",
@@ -1163,8 +1324,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, PopuMusic 제작. 최근 업데이트 <span id=\"last-updated\">2026</span>. 피드백: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"이 답변이 도움이 되었나요?","fb.thanks":"피드백 감사합니다.",
 "banner.autotrans":"기계 보조 번역입니다. 정정 환영: support@partykeys.com",
-"search.hint":"","search.hint2":"를 눌러 AI 에 질문 · 입력하면 즉시 필터링",
+"search.hint":"","search.hint2":"를 눌러 AI 에게 즉시 답변받기 · 입력하면 FAQ 필터링",
 "ask.sources":"참고 항목","ask.related":"관련 질문","ask.helpful":"이 답변이 도움이 되었나요?","ask.thanks":"피드백 감사합니다.","ask.close":"닫기","ask.thinking":"생각 중…",
+"contact.title":"고객지원 문의","contact.desc":"메시지를 보내주시면 24 시간 내에 이메일로 답변드립니다.",
+"contact.emailLabel":"이메일 <span class=\"opt\">(여기로 답변드립니다)</span>","contact.subjectLabel":"제목 <span class=\"opt\">(선택)</span>","contact.orderLabel":"주문 번호 <span class=\"opt\">(해당 시)</span>","contact.messageLabel":"메시지",
+"contact.send":"보내기","contact.fineprint":"support@partykeys.com 으로 바로 전달됩니다. 24 시간 내 답변드립니다.",
+"contact.successTitle":"전송 완료!","contact.successDesc":"메시지를 받았습니다. 24 시간 내에 이메일로 답변드립니다.","contact.successBtn":"닫기",
 "qa.bt-fail.q":"PartyKeys 가 블루투스로 연결되지 않습니다",
 "qa.battery.q":"배터리 지속 시간과 충전 방법은?",
 "qa.app-devices.q":"앱이 지원하는 기기는?",
@@ -1179,7 +1344,7 @@ window.I18N = {
 "pt": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantia",
 "hero.eyebrow":"Suporte PartyKeys","hero.title":"Como podemos ajudar?","hero.subtitle":"Respostas rápidas sobre PartyKeys, PartyStudio, app PopuMusic, configuração e garantia.",
-"search.placeholder":"Buscar ajuda",
+"search.placeholder":"Pergunte à IA sobre o PartyKeys…",
 "chip.bluetooth":"Bluetooth","chip.charging":"Carregamento","chip.return":"Devoluções","chip.compat":"Compatibilidade","chip.drum":"Bateria eletrônica",
 "qc.start":"Início rápido","qc.keys":"Teclado PartyKeys","qc.studio":"Caixa PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Solução de problemas","qc.warranty":"Garantia e devoluções","qc.account":"Conta","qc.gen1":"Usuários do PopuPiano",
 "popular.title":"Mais perguntadas","popular.badge":"TOP 10",
@@ -1198,8 +1363,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, por PopuMusic. Última atualização <span id=\"last-updated\">2026</span>. Feedback: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"Esta resposta foi útil?","fb.thanks":"Obrigado pelo feedback.",
 "banner.autotrans":"Tradução assistida por IA. Correções bem-vindas em support@partykeys.com.",
-"search.hint":"Pressione","search.hint2":"para perguntar à IA · digite para filtrar",
+"search.hint":"Pressione","search.hint2":"para uma resposta instantânea da IA · ou digite para filtrar a FAQ",
 "ask.sources":"Fontes","ask.related":"Perguntas relacionadas","ask.helpful":"Esta resposta foi útil?","ask.thanks":"Obrigado pelo feedback.","ask.close":"Fechar","ask.thinking":"Pensando…",
+"contact.title":"Falar com suporte","contact.desc":"Envie uma mensagem e responderemos ao seu e-mail em 24 horas.",
+"contact.emailLabel":"Seu e-mail <span class=\"opt\">(responderemos aqui)</span>","contact.subjectLabel":"Assunto <span class=\"opt\">(opcional)</span>","contact.orderLabel":"Número do pedido <span class=\"opt\">(se aplicável)</span>","contact.messageLabel":"Mensagem",
+"contact.send":"Enviar","contact.fineprint":"Vai direto para support@partykeys.com. Resposta em até 24 horas.",
+"contact.successTitle":"Mensagem enviada!","contact.successDesc":"Recebemos sua mensagem e responderemos em até 24 horas.","contact.successBtn":"Fechar",
 "qa.bt-fail.q":"PartyKeys não conecta por Bluetooth",
 "qa.battery.q":"Quanto dura a bateria e como carregar?",
 "qa.app-devices.q":"Quais dispositivos o app suporta?",
@@ -1214,7 +1383,7 @@ window.I18N = {
 "vi": {
 "nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Bảo hành",
 "hero.eyebrow":"Hỗ trợ PartyKeys","hero.title":"Chúng tôi có thể giúp gì?","hero.subtitle":"Câu trả lời nhanh về PartyKeys, PartyStudio, ứng dụng PopuMusic, cài đặt và bảo hành.",
-"search.placeholder":"Tìm trợ giúp",
+"search.placeholder":"Hỏi AI mọi thứ về PartyKeys…",
 "chip.bluetooth":"Bluetooth","chip.charging":"Sạc pin","chip.return":"Trả hàng","chip.compat":"Tương thích","chip.drum":"Trống điện tử",
 "qc.start":"Bắt đầu nhanh","qc.keys":"Bàn phím PartyKeys","qc.studio":"Loa PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Khắc phục sự cố","qc.warranty":"Bảo hành và trả hàng","qc.account":"Tài khoản","qc.gen1":"Người dùng PopuPiano",
 "popular.title":"Câu hỏi phổ biến","popular.badge":"TOP 10",
@@ -1233,8 +1402,12 @@ window.I18N = {
 "footer.legal":"© PartyKeys, do PopuMusic phát triển. Cập nhật lần cuối <span id=\"last-updated\">2026</span>. Phản hồi: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
 "fb.helpful":"Câu trả lời này có hữu ích không?","fb.thanks":"Cảm ơn bạn đã phản hồi.",
 "banner.autotrans":"Bản dịch hỗ trợ bởi máy. Góp ý gửi về support@partykeys.com.",
-"search.hint":"Nhấn","search.hint2":"để hỏi AI · gõ để lọc",
+"search.hint":"Nhấn","search.hint2":"để nhận câu trả lời tức thì từ AI · hoặc gõ để lọc FAQ",
 "ask.sources":"Nguồn","ask.related":"Câu hỏi liên quan","ask.helpful":"Câu trả lời này có hữu ích không?","ask.thanks":"Cảm ơn phản hồi.","ask.close":"Đóng","ask.thinking":"Đang suy nghĩ…",
+"contact.title":"Liên hệ hỗ trợ","contact.desc":"Gửi cho chúng tôi tin nhắn — chúng tôi sẽ trả lời email của bạn trong vòng 24 giờ.",
+"contact.emailLabel":"Email của bạn <span class=\"opt\">(chúng tôi sẽ trả lời tại đây)</span>","contact.subjectLabel":"Tiêu đề <span class=\"opt\">(tuỳ chọn)</span>","contact.orderLabel":"Mã đơn hàng <span class=\"opt\">(nếu có)</span>","contact.messageLabel":"Tin nhắn",
+"contact.send":"Gửi","contact.fineprint":"Được gửi trực tiếp đến support@partykeys.com. Phản hồi trong vòng 24 giờ.",
+"contact.successTitle":"Đã gửi!","contact.successDesc":"Chúng tôi đã nhận được tin nhắn và sẽ phản hồi trong vòng 24 giờ.","contact.successBtn":"Đóng",
 "qa.bt-fail.q":"PartyKeys không kết nối Bluetooth được",
 "qa.battery.q":"Pin dùng được bao lâu và sạc thế nào?",
 "qa.app-devices.q":"App hỗ trợ những thiết bị nào?",
@@ -1685,6 +1858,155 @@ window.I18N = {
 
   // Re-translate the static AI-card labels when language switches
   // (lang switcher in the main IIFE re-runs translation; we just expose i18n keys via data-i18n)
+})();
+
+// =================== CONTACT MODAL ===================
+// Feature flag — set to true once RESEND_API_KEY is configured in Vercel.
+// While false: mailto: links work normally, contact form is dormant.
+window.PARTYKEYS_CONTACT_ENABLED = false;
+
+(function () {
+  if (!window.PARTYKEYS_CONTACT_ENABLED) return;
+  var overlay = document.getElementById('contact-overlay');
+  var form = document.getElementById('contact-form');
+  var success = document.getElementById('contact-success');
+  var errorEl = document.getElementById('contact-error');
+  var submitBtn = document.getElementById('contact-submit');
+  var closeX = document.getElementById('contact-x');
+  var successClose = document.getElementById('contact-success-close');
+
+  function openModal(prefill) {
+    prefill = prefill || {};
+    success.classList.remove('show');
+    form.style.display = '';
+    errorEl.classList.remove('error');
+    errorEl.textContent = '';
+    if (prefill.subject) form.querySelector('[name=subject]').value = prefill.subject;
+    if (prefill.message) form.querySelector('[name=message]').value = prefill.message;
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { form.querySelector('[name=email]').focus(); }, 80);
+  }
+  function closeModal() {
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  closeX.addEventListener('click', closeModal);
+  successClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
+  });
+
+  // Intercept all mailto: clicks anywhere on the page → open modal instead.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+    if (!a) return;
+    if (a.dataset.allowMailto === 'true') return; // explicit override
+    e.preventDefault();
+    var href = a.getAttribute('href') || '';
+    var subj = '';
+    var qIdx = href.indexOf('?');
+    if (qIdx >= 0) {
+      var qs = href.slice(qIdx + 1);
+      var params = qs.split('&');
+      for (var i = 0; i < params.length; i++) {
+        var kv = params[i].split('=');
+        if (kv[0] === 'subject') subj = decodeURIComponent((kv[1] || '').replace(/\+/g, ' '));
+      }
+    }
+    openModal({ subject: subj });
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorEl.classList.remove('error');
+    errorEl.textContent = '';
+    var data = {
+      email: form.querySelector('[name=email]').value.trim(),
+      subject: form.querySelector('[name=subject]').value.trim(),
+      orderId: form.querySelector('[name=orderId]').value.trim(),
+      message: form.querySelector('[name=message]').value.trim(),
+      website: form.querySelector('[name=website]').value.trim(),
+      lang: document.body.getAttribute('data-lang') || 'en',
+    };
+    // Client-side validation
+    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      showFormError('Please enter a valid email address.');
+      return;
+    }
+    if (!data.message || data.message.length < 10) {
+      showFormError('Please add a few details about your question (at least 10 characters).');
+      return;
+    }
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      var resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!resp.ok) {
+        var msg = 'Could not send your message. Please try again.';
+        try { var j = await resp.json(); if (j && j.error) msg = j.error; } catch (e) {}
+        // If endpoint isn't deployed at all, give a graceful fallback.
+        if (resp.status === 404) {
+          msg = 'Email service is not yet configured. As a workaround, please email support@partykeys.com directly.';
+        }
+        showFormError(msg);
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        return;
+      }
+      // Success
+      form.style.display = 'none';
+      success.classList.add('show');
+      form.reset();
+    } catch (err) {
+      showFormError('Network error. Please check your connection and try again.');
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+
+  function showFormError(text) {
+    errorEl.textContent = text;
+    errorEl.classList.add('error');
+  }
+
+  // Auto-link email mentions inside AI answers as they stream/finalize.
+  // We watch the ask-answer node for changes and rewrite plain-text email mentions into mailto: links
+  // (which the global click handler above will hijack into the modal).
+  var askAnswer = document.getElementById('ask-answer');
+  if (askAnswer) {
+    var emailRe = /\bsupport@partykeys\.com\b/g;
+    var observer = new MutationObserver(function () {
+      // Skip if no plain-text occurrence
+      var html = askAnswer.innerHTML;
+      if (!emailRe.test(html)) return;
+      // Replace only when the substring is NOT already inside an <a> tag.
+      // Cheap approach: split into anchor-segments and replace outside them.
+      var newHtml = html.replace(/(<a [^>]*>[\s\S]*?<\/a>)|(\bsupport@partykeys\.com\b)/g, function (m, anchor, plain) {
+        if (anchor) return anchor;
+        return '<a href="mailto:support@partykeys.com">support@partykeys.com</a>';
+      });
+      if (newHtml !== html) {
+        observer.disconnect();
+        askAnswer.innerHTML = newHtml;
+        observer.observe(askAnswer, { childList: true, subtree: true, characterData: true });
+      }
+    });
+    observer.observe(askAnswer, { childList: true, subtree: true, characterData: true });
+  }
+
+  // Expose a global so we can open the modal programmatically if needed.
+  window.PartyKeysContact = { open: openModal, close: closeModal };
 })();
 </script>
 </body>

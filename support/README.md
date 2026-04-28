@@ -11,9 +11,10 @@ PartyKeys customer Help Center with AI-powered search.
 
 ```
 support/
-├── index.html        # main page — UI, FAQ, i18n, AI search client
+├── index.html        # main page — UI, FAQ, i18n, AI search, contact modal
 ├── api/
-│   └── ask.js        # Vercel Edge Function — proxies Claude Messages API
+│   ├── ask.js        # Vercel Edge Function — Claude streaming Q&A
+│   └── contact.js    # Vercel Edge Function — Resend email sender
 ├── vercel.json       # security headers + cache hints
 ├── .gitignore
 └── README.md         # this file
@@ -50,15 +51,23 @@ vercel.com → Add New → Project → pick the repo → Import.
 | Root Directory | leave empty |
 | Build / Install / Output Command | leave empty |
 
-### 3. Add the API key (required)
+### 3. Add the environment variables
 
-Before clicking Deploy, in the Import page expand **Environment Variables** and add:
+Before clicking Deploy (or in Settings → Environment Variables after the fact), add:
 
-| Key | Value | Environments |
-|---|---|---|
-| `ANTHROPIC_API_KEY` | `sk-ant-...` (from console.anthropic.com → Settings → API Keys) | Production, Preview, Development |
+| Key | Required | Value | Where to get it |
+|---|---|---|---|
+| `ANTHROPIC_API_KEY` | yes (for AI search) | `sk-ant-...` | console.anthropic.com → Settings → API Keys |
+| `RESEND_API_KEY` | yes (for contact form) | `re_...` | resend.com → API Keys (free tier: 100 emails/day) |
+| `RESEND_FROM` | optional | e.g. `PartyKeys <support@partykeys.com>` | once you verify partykeys.com on Resend |
+| `RESEND_TO` | optional | `support@partykeys.com` | inbox where contact form messages land |
 
-If you forget and deploy first, it's fine — just add it after the fact in Settings → Environment Variables, then redeploy from the Deployments tab.
+**Resend setup (5 minutes):**
+1. Sign up at resend.com (free).
+2. For testing **right now**, leave `RESEND_FROM` unset — defaults to `onboarding@resend.dev`, which works without domain verification.
+3. For production: add `partykeys.com` as a domain in Resend, copy the SPF/DKIM DNS records into your DNS provider, wait for verification (~10 min), then set `RESEND_FROM` to a `@partykeys.com` address.
+
+Set Environments = Production + Preview + Development for both API keys. If you deployed before adding them, redeploy from the Deployments tab.
 
 ### 4. Bind support.partykeys.org
 
