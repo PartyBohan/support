@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PartyKeys — Support</title>
+<meta name="description" content="Help and support for PartyKeys, PartyStudio, and the PopuMusic app." />
+<style>
+  :root {
+    --bg: #FBFBFD;
+    --surface: #FFFFFF;
+    --surface-2: #F5F5F7;
+    --text: #1D1D1F;
+    --text-2: #424245;
+    --muted: #6E6E73;
+    --hairline: #D2D2D7;
+    --hairline-soft: #E8E8ED;
+    --blue: #4A6FFF;
+    --purple: #9B5BFF;
+    --orange: #FF8A4C;
+    --brand-grad: linear-gradient(135deg, #4A6FFF 0%, #9B5BFF 50%, #FF8A4C 100%);
+    --brand-grad-soft: linear-gradient(135deg, rgba(74,111,255,0.08) 0%, rgba(155,91,255,0.08) 50%, rgba(255,138,76,0.08) 100%);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 24px 60px rgba(0,0,0,0.10);
+    --shadow-brand: 0 12px 36px rgba(155,91,255,0.18);
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0A0A0C;
+      --surface: #161618;
+      --surface-2: #1C1C1E;
+      --text: #F5F5F7;
+      --text-2: #D2D2D7;
+      --muted: #98989D;
+      --hairline: #38383A;
+      --hairline-soft: #2C2C2E;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5; font-size: 17px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing: -0.01em;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* TOPBAR */
+  .topbar { position: sticky; top: 0; z-index: 100; background: rgba(251,251,253,0.75); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--hairline-soft); }
+  @media (prefers-color-scheme: dark) { .topbar { background: rgba(10,10,12,0.75); } }
+  .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: var(--text-2); }
+  .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; color: var(--text); }
+  .brand-mark { width: 22px; height: 22px; border-radius: 6px; background: var(--brand-grad); flex-shrink: 0; box-shadow: 0 2px 8px rgba(155,91,255,0.25); }
+  .topbar nav { display: flex; gap: 22px; align-items: center; }
+  .topbar nav a { color: var(--text-2); transition: color 0.15s var(--easing); }
+  .topbar nav a:hover { color: var(--text); }
+  .lang-wrap { position: relative; }
+  .lang-toggle { border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 12px 5px 14px; font-size: 13px; background: transparent; color: var(--text-2); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; transition: all 0.15s var(--easing); }
+  .lang-toggle:hover { border-color: var(--text); color: var(--text); }
+  .lang-toggle svg { width: 12px; height: 12px; opacity: 0.6; }
+  .lang-menu { position: absolute; top: 38px; right: 0; background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: 14px; box-shadow: var(--shadow-md); padding: 6px; min-width: 180px; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: all 0.2s var(--easing); z-index: 200; }
+  .lang-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .lang-item { display: block; padding: 8px 12px; border-radius: 8px; color: var(--text-2); font-size: 14px; cursor: pointer; transition: background 0.12s, color 0.12s; }
+  .lang-item:hover { background: var(--surface-2); color: var(--text); }
+  .lang-item.active { background: var(--brand-grad-soft); color: var(--text); font-weight: 500; }
+
+  /* HERO */
+  .hero { padding: 96px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at center, rgba(155,91,255,0.10) 0%, rgba(74,111,255,0.04) 35%, transparent 70%); pointer-events: none; z-index: 0; }
+  .hero > * { position: relative; z-index: 1; }
+  .hero .eyebrow { font-size: 14px; font-weight: 500; color: var(--muted); letter-spacing: 0.02em; margin-bottom: 14px; }
+  .hero h1 { font-size: clamp(44px, 7vw, 72px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; margin: 0 0 20px; background: var(--brand-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .subtitle { font-size: 19px; color: var(--muted); margin: 0 auto 44px; max-width: 540px; line-height: 1.5; }
+
+  .search-shell { max-width: 580px; margin: 0 auto; }
+  .search-box { position: relative; transition: transform 0.3s var(--easing); }
+  .search-box input { width: 100%; height: 60px; padding: 0 24px 0 56px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--surface); font-size: 17px; color: var(--text); outline: none; transition: all 0.25s var(--easing); font-family: inherit; letter-spacing: -0.01em; }
+  .search-box input::placeholder { color: var(--muted); }
+  .search-box input:focus { border-color: transparent; box-shadow: 0 0 0 2px var(--purple), var(--shadow-brand); }
+  .search-box .icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; display: flex; }
+  .popular-chips { margin-top: 18px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chip { padding: 7px 14px; border: 1px solid var(--hairline); border-radius: 999px; background: var(--surface); font-size: 13.5px; color: var(--text-2); cursor: pointer; transition: all 0.15s var(--easing); font-family: inherit; }
+  .chip:hover { border-color: var(--purple); color: var(--text); transform: translateY(-1px); }
+
+  /* QUICK CATEGORIES */
+  .quick-cats { max-width: 1080px; margin: 32px auto 0; padding: 0 24px; }
+  .quick-cats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .qc-card { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border: 1px solid var(--hairline-soft); border-radius: var(--radius-md); background: var(--surface); text-align: left; transition: all 0.2s var(--easing); cursor: pointer; }
+  .qc-card:hover { border-color: var(--purple); transform: translateY(-2px); box-shadow: var(--shadow-brand); }
+  .qc-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--text); display: flex; align-items: center; justify-content: center; }
+  .qc-icon svg { width: 100%; height: 100%; }
+  .qc-card:hover .qc-icon { color: var(--purple); }
+  .qc-label { font-size: 14.5px; font-weight: 500; line-height: 1.3; }
+
+  /* MOST ASKED (TOP 10) */
+  .most-asked { max-width: 760px; margin: 64px auto 0; padding: 0 24px; }
+  .most-asked-card { background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: var(--radius-lg); padding: 8px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+  .most-asked-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-grad); }
+  .most-asked-header { padding: 22px 24px 14px; display: flex; align-items: baseline; gap: 12px; }
+  .most-asked-header h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); }
+  .most-asked-header .badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--brand-grad); color: white; letter-spacing: 0.04em; text-transform: uppercase; }
+  .most-asked-list { list-style: none; padding: 0; margin: 0; }
+  .most-asked-list li { border-top: 1px solid var(--hairline-soft); }
+  .most-asked-list li:first-child { border-top: none; }
+  .most-asked-list a { display: flex; align-items: center; gap: 16px; padding: 16px 24px; color: var(--text); transition: background 0.12s var(--easing); }
+  .most-asked-list a:hover { background: var(--surface-2); }
+  .most-asked-list .num { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; font-weight: 600; min-width: 24px; }
+  .most-asked-list .q-text { flex: 1; font-size: 15.5px; font-weight: 500; }
+  .most-asked-list .arrow { color: var(--muted); flex-shrink: 0; transition: transform 0.15s var(--easing), color 0.15s; }
+  .most-asked-list a:hover .arrow { color: var(--purple); transform: translateX(3px); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .section { padding: 60px 0; border-top: 1px solid var(--hairline-soft); opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--easing), transform 0.7s var(--easing); }
+  .section.visible { opacity: 1; transform: translateY(0); }
+  .section:first-of-type { border-top: none; padding-top: 80px; }
+
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .section-icon { width: 32px; height: 32px; flex-shrink: 0; color: var(--text); display: flex; }
+  .section-icon svg { width: 100%; height: 100%; }
+  .section h2 { font-size: 32px; font-weight: 700; letter-spacing: -0.025em; margin: 0; color: var(--text); }
+  .section-desc { color: var(--muted); font-size: 17px; margin: 0 0 28px 46px; line-height: 1.5; }
+
+  /* Q&A */
+  .qa-list { border-top: 1px solid var(--hairline-soft); }
+  details.qa { border-bottom: 1px solid var(--hairline-soft); overflow: hidden; }
+  details.qa summary { padding: 22px 8px 22px 0; cursor: pointer; font-weight: 500; font-size: 17.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--text); transition: color 0.15s var(--easing); letter-spacing: -0.01em; line-height: 1.4; }
+  details.qa summary::-webkit-details-marker { display: none; }
+  details.qa summary:hover { opacity: 0.7; }
+  details.qa summary::after { content: ''; flex-shrink: 0; width: 22px; height: 22px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236E6E73' stroke-width='1.8' stroke-linecap='round'><line x1='12' y1='5' x2='12' y2='19'/><line x1='5' y1='12' x2='19' y2='12'/></svg>"); background-size: contain; background-repeat: no-repeat; transition: transform 0.3s var(--easing); }
+  details.qa[open] summary::after { transform: rotate(45deg); }
+  details.qa .answer-wrap { overflow: hidden; max-height: 0; transition: max-height 0.4s var(--easing); }
+  details.qa[open] .answer-wrap { max-height: 2400px; transition: max-height 0.6s var(--easing); }
+  .answer { padding: 0 8px 28px 0; color: var(--text-2); font-size: 16px; line-height: 1.65; }
+  .answer p { margin: 0 0 14px; }
+  .answer p:last-child { margin-bottom: 0; }
+  .answer ul, .answer ol { margin: 12px 0 16px; padding-left: 22px; }
+  .answer li { margin-bottom: 8px; }
+  .answer strong { color: var(--text); font-weight: 600; }
+  .answer code { background: var(--surface-2); padding: 2px 8px; border-radius: 6px; font-size: 14.5px; font-family: "SF Mono", "Menlo", Monaco, Consolas, monospace; }
+  .answer .note { background: var(--surface-2); border-radius: 12px; padding: 14px 18px; font-size: 15px; margin: 16px 0; color: var(--text-2); }
+  .answer .placeholder { background: rgba(255,138,76,0.08); border-radius: 12px; padding: 14px 18px; font-size: 14.5px; margin: 16px 0; color: #B45309; border: 1px solid rgba(255,138,76,0.25); }
+  @media (prefers-color-scheme: dark) { .answer .placeholder { color: #FBBF24; background: rgba(255,138,76,0.10); border-color: rgba(255,138,76,0.30); } }
+  .answer a { color: var(--text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--hairline); transition: text-decoration-color 0.15s var(--easing); }
+  .answer a:hover { text-decoration-color: var(--purple); }
+
+  /* Auto-translation banner */
+  .translation-banner { display: none; background: var(--brand-grad-soft); border: 1px solid rgba(155,91,255,0.18); border-radius: var(--radius-md); padding: 12px 18px; margin: 24px 0 36px; font-size: 13.5px; color: var(--text-2); text-align: center; }
+  body[data-lang="es"] .translation-banner,
+  body[data-lang="fr"] .translation-banner,
+  body[data-lang="de"] .translation-banner,
+  body[data-lang="ja"] .translation-banner,
+  body[data-lang="ko"] .translation-banner,
+  body[data-lang="pt"] .translation-banner,
+  body[data-lang="vi"] .translation-banner { display: block; }
+
+  /* Feedback */
+  .feedback { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--hairline-soft); display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); flex-wrap: wrap; }
+  .feedback-buttons { display: flex; gap: 8px; }
+  .fb-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--hairline); background: var(--surface); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s var(--easing); }
+  .fb-btn:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-1px); }
+  .fb-btn.active { border-color: var(--purple); color: white; background: var(--brand-grad); }
+  .fb-thanks { display: none; color: var(--text-2); }
+  .feedback.done .feedback-buttons { display: none; }
+  .feedback.done .fb-thanks { display: inline; }
+
+  /* Section CTA */
+  .section-cta { margin-top: 36px; padding: 20px 24px; background: var(--brand-grad-soft); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 15px; color: var(--text-2); border: 1px solid rgba(155,91,255,0.10); }
+  .section-cta a { font-weight: 500; color: var(--text); display: inline-flex; align-items: center; gap: 6px; }
+  .section-cta a::after { content: '→'; transition: transform 0.15s var(--easing); }
+  .section-cta a:hover::after { transform: translateX(3px); }
+
+  #no-results { display: none; text-align: center; padding: 80px 20px; color: var(--muted); font-size: 17px; }
+
+  /* FOOTER */
+  footer { padding: 80px 24px 60px; border-top: 1px solid var(--hairline-soft); text-align: center; color: var(--muted); font-size: 13px; }
+  .contact-card { max-width: 520px; margin: 0 auto 48px; padding: 36px 28px; background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: var(--radius-lg); color: var(--text); text-align: center; position: relative; overflow: hidden; }
+  .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-grad); }
+  .contact-card h3 { margin: 0 0 8px; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+  .contact-card p { margin: 0 0 22px; color: var(--muted); font-size: 15.5px; }
+  .contact-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; background: var(--brand-grad); color: white !important; border-radius: 999px; font-size: 15px; font-weight: 500; transition: transform 0.2s var(--easing), box-shadow 0.2s var(--easing); box-shadow: var(--shadow-brand); }
+  .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(155,91,255,0.28); }
+  footer .legal { color: var(--muted); font-size: 12.5px; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+  footer .legal a { color: var(--muted); border-bottom: 1px solid transparent; }
+  footer .legal a:hover { color: var(--text-2); border-bottom-color: var(--hairline); }
+
+  /* FLOATING CONTACT */
+  .floating-contact { position: fixed; bottom: 24px; right: 24px; z-index: 90; width: 56px; height: 56px; border-radius: 999px; background: var(--brand-grad); color: white !important; box-shadow: var(--shadow-brand); display: flex; align-items: center; justify-content: center; transition: transform 0.2s var(--easing), opacity 0.2s var(--easing); opacity: 0; transform: translateY(20px); pointer-events: none; }
+  .floating-contact.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .floating-contact:hover { transform: translateY(-3px) scale(1.05); }
+
+  mark { background: linear-gradient(transparent 60%, rgba(255,138,76,0.35) 60%); color: inherit; padding: 0 1px; border-radius: 1px; }
+
+  /* AI ASK CARD */
+  .search-hint { margin-top: 14px; font-size: 12.5px; color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 6px; opacity: 0.85; }
+  .search-hint kbd { font-family: inherit; font-size: 11px; padding: 2px 7px; border: 1px solid var(--hairline); border-radius: 5px; background: var(--surface); color: var(--text-2); box-shadow: 0 1px 0 var(--hairline-soft); }
+  .search-hint .sparkle svg { width: 12px; height: 12px; vertical-align: -2px; }
+
+  .ask-shell { max-width: 760px; margin: 28px auto 0; padding: 0 24px; }
+  .ask-card { position: relative; background: var(--surface); border: 1px solid var(--hairline-soft); border-radius: var(--radius-lg); padding: 28px 30px; box-shadow: var(--shadow-md); overflow: hidden; display: none; }
+  .ask-card.show { display: block; animation: askIn 0.45s var(--easing); }
+  @keyframes askIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .ask-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--brand-grad); }
+  .ask-card.thinking::before { animation: shimmer 1.6s infinite linear; background-size: 300% 100%; background-image: linear-gradient(90deg, #4A6FFF, #9B5BFF, #FF8A4C, #9B5BFF, #4A6FFF); }
+  @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+  .ask-question { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.5; }
+  .ask-q-mark { flex-shrink: 0; margin-top: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-grad); box-shadow: 0 0 0 4px rgba(155,91,255,0.10); }
+  .ask-q-text { font-weight: 500; color: var(--text-2); }
+  .ask-answer { font-size: 16.5px; line-height: 1.7; color: var(--text); min-height: 24px; }
+  .ask-answer p { margin: 0 0 12px; }
+  .ask-answer p:last-child { margin-bottom: 0; }
+  .ask-answer strong { font-weight: 600; color: var(--text); }
+  .ask-answer code { background: var(--surface-2); padding: 2px 7px; border-radius: 5px; font-size: 14.5px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; }
+  .ask-cursor { display: inline-block; width: 8px; height: 18px; background: var(--brand-grad); margin-left: 3px; vertical-align: -3px; border-radius: 1.5px; animation: cursorBlink 0.9s infinite; }
+  @keyframes cursorBlink { 50% { opacity: 0.2; } }
+  .ask-loading { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 14.5px; }
+  .ask-spinner { width: 18px; height: 18px; border: 2px solid var(--hairline); border-top-color: var(--purple); border-radius: 50%; animation: spin 0.85s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ask-error { display: flex; align-items: flex-start; gap: 10px; padding: 14px 16px; border-radius: 12px; background: rgba(255,138,76,0.08); border: 1px solid rgba(255,138,76,0.22); color: #B45309; font-size: 14.5px; }
+  @media (prefers-color-scheme: dark) { .ask-error { color: #FBBF24; background: rgba(255,138,76,0.10); } }
+  .ask-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--hairline-soft); opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--easing), transform 0.4s var(--easing); }
+  .ask-section.show { opacity: 1; transform: translateY(0); }
+  .ask-section-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .source-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .source-chip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; background: var(--brand-grad-soft); border: 1px solid rgba(155,91,255,0.18); font-size: 13.5px; color: var(--text); cursor: pointer; transition: all 0.15s var(--easing); font-family: inherit; }
+  .source-chip:hover { border-color: var(--purple); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(155,91,255,0.18); color: var(--text); }
+  .source-chip svg { width: 11px; height: 11px; opacity: 0.6; }
+  .related-list { display: flex; flex-direction: column; gap: 4px; }
+  .related-item { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 10px; color: var(--text); font-size: 14.5px; cursor: pointer; transition: background 0.15s var(--easing); border: 1px solid transparent; }
+  .related-item:hover { background: var(--surface-2); border-color: var(--hairline-soft); color: var(--text); }
+  .related-item .arrow { color: var(--muted); transition: transform 0.15s var(--easing); flex-shrink: 0; }
+  .related-item:hover .arrow { transform: translateX(3px); color: var(--purple); }
+  .ask-actions { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--hairline-soft); display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+  .ask-feedback-buttons { display: inline-flex; gap: 6px; }
+  .ask-feedback-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--hairline); background: var(--surface); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s var(--easing); }
+  .ask-feedback-btn:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-1px); }
+  .ask-feedback-btn.active { border-color: transparent; background: var(--brand-grad); color: white; }
+  .ask-actions .ask-thanks { display: none; color: var(--text-2); }
+  .ask-actions.done .ask-feedback-buttons { display: none; }
+  .ask-actions.done .ask-thanks { display: inline; }
+  .ask-close { margin-left: auto; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--hairline); background: var(--surface); color: var(--text-2); cursor: pointer; font-size: 13px; font-family: inherit; transition: all 0.15s var(--easing); display: inline-flex; align-items: center; gap: 8px; }
+  .ask-close:hover { border-color: var(--text); color: var(--text); }
+  .ask-close kbd { font-family: inherit; font-size: 10.5px; padding: 1px 5px; border: 1px solid var(--hairline); border-radius: 4px; color: var(--muted); }
+  @media (max-width: 720px) {
+    .ask-shell { padding: 0 18px; }
+    .ask-card { padding: 22px 20px; border-radius: 22px; }
+    .ask-answer { font-size: 15.5px; }
+    .ask-close { padding: 7px 12px; }
+    .ask-close kbd { display: none; }
+    .search-hint { font-size: 12px; }
+  }
+
+  @media (max-width: 720px) {
+    .hero { padding: 60px 20px 48px; }
+    .hero .subtitle { font-size: 17px; margin-bottom: 32px; }
+    main { padding: 0 20px 60px; }
+    .most-asked { padding: 0 20px; margin-top: 48px; }
+    .section { padding: 44px 0; }
+    .section:first-of-type { padding-top: 56px; }
+    .section h2 { font-size: 26px; }
+    .section-desc { font-size: 15.5px; margin-left: 44px; }
+    details.qa summary { font-size: 16px; padding: 18px 6px 18px 0; }
+    .answer { font-size: 15px; padding-bottom: 22px; }
+    .quick-cats-grid { grid-template-columns: repeat(2, 1fr); }
+    .topbar nav { gap: 14px; }
+    .topbar nav .hide-mobile { display: none; }
+    .floating-contact { bottom: 18px; right: 18px; }
+    .most-asked-list a { padding: 14px 18px; gap: 12px; }
+    .most-asked-list .q-text { font-size: 14.5px; }
+  }
+</style>
+</head>
+<body data-lang="en">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand"><span class="brand-mark"></span> PartyKeys</a>
+    <nav>
+      <a href="#partykeys" class="hide-mobile" data-i18n="nav.keys">PartyKeys</a>
+      <a href="#partystudio" class="hide-mobile" data-i18n="nav.studio">PartyStudio</a>
+      <a href="#app" class="hide-mobile" data-i18n="nav.app">App</a>
+      <a href="#warranty" class="hide-mobile" data-i18n="nav.warranty">Warranty</a>
+      <div class="lang-wrap">
+        <button class="lang-toggle" id="lang-toggle" aria-label="Change language">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span id="lang-current">English</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-menu" id="lang-menu">
+          <a class="lang-item active" data-lang="en">English</a>
+          <a class="lang-item" data-lang="zh-CN">简体中文</a>
+          <a class="lang-item" data-lang="zh-TW">繁體中文</a>
+          <a class="lang-item" data-lang="es">Español</a>
+          <a class="lang-item" data-lang="fr">Français</a>
+          <a class="lang-item" data-lang="de">Deutsch</a>
+          <a class="lang-item" data-lang="ja">日本語</a>
+          <a class="lang-item" data-lang="ko">한국어</a>
+          <a class="lang-item" data-lang="pt">Português</a>
+          <a class="lang-item" data-lang="vi">Tiếng Việt</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="eyebrow" data-i18n="hero.eyebrow">PartyKeys Support</div>
+  <h1 data-i18n="hero.title">How can we help?</h1>
+  <p class="subtitle" data-i18n="hero.subtitle">Quick answers about your PartyKeys, PartyStudio, the PopuMusic app, setup, and warranty.</p>
+  <div class="search-shell">
+    <div class="search-box">
+      <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input id="search" type="text" placeholder="Search support" data-i18n-attr="placeholder" data-i18n="search.placeholder" autocomplete="off" />
+    </div>
+    <div class="popular-chips">
+      <button class="chip" data-q="bluetooth" data-i18n="chip.bluetooth">Bluetooth</button>
+      <button class="chip" data-q="charging" data-i18n="chip.charging">Charging</button>
+      <button class="chip" data-q="return" data-i18n="chip.return">Returns</button>
+      <button class="chip" data-q="iphone" data-i18n="chip.compat">Compatible phones</button>
+      <button class="chip" data-q="drum" data-i18n="chip.drum">Drum machine</button>
+    </div>
+    <div class="search-hint">
+      <span class="sparkle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.3L12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg></span>
+      <span data-i18n="search.hint">Press</span>
+      <kbd>Enter</kbd>
+      <span data-i18n="search.hint2">to ask AI · type to filter</span>
+    </div>
+  </div>
+</header>
+
+<!-- AI ANSWER CARD -->
+<div class="ask-shell">
+  <div class="ask-card" id="ask-card" role="region" aria-live="polite" aria-label="AI answer">
+    <div class="ask-question"><span class="ask-q-mark"></span><span class="ask-q-text" id="ask-q"></span></div>
+    <div class="ask-answer" id="ask-answer"></div>
+    <div class="ask-section" id="ask-sources" hidden>
+      <div class="ask-section-label" data-i18n="ask.sources">Sources</div>
+      <div class="source-chips" id="ask-sources-list"></div>
+    </div>
+    <div class="ask-section" id="ask-related" hidden>
+      <div class="ask-section-label" data-i18n="ask.related">Related questions</div>
+      <div class="related-list" id="ask-related-list"></div>
+    </div>
+    <div class="ask-actions" id="ask-actions" hidden>
+      <span data-i18n="ask.helpful">Was this helpful?</span>
+      <span class="ask-feedback-buttons">
+        <button class="ask-feedback-btn" data-val="up" aria-label="Yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button>
+        <button class="ask-feedback-btn" data-val="down" aria-label="No"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg></button>
+      </span>
+      <span class="ask-thanks" data-i18n="ask.thanks">Thanks for the feedback.</span>
+      <button class="ask-close" id="ask-close"><span data-i18n="ask.close">Close</span> <kbd>Esc</kbd></button>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK CATEGORIES -->
+<div class="quick-cats">
+  <div class="quick-cats-grid">
+    <a href="#quick-start" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg></span><span class="qc-label" data-i18n="qc.start">Quick Start</span></a>
+    <a href="#partykeys" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 6v8M11 6v8M15 6v8M19 6v8"/></svg></span><span class="qc-label" data-i18n="qc.keys">PartyKeys Keyboard</span></a>
+    <a href="#partystudio" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2.5"/><circle cx="16" cy="12" r="1.5"/></svg></span><span class="qc-label" data-i18n="qc.studio">PartyStudio Speaker</span></a>
+    <a href="#app" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></span><span class="qc-label" data-i18n="qc.app">PopuMusic App</span></a>
+    <a href="#troubleshooting" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><span class="qc-label" data-i18n="qc.trouble">Troubleshooting</span></a>
+    <a href="#warranty" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg></span><span class="qc-label" data-i18n="qc.warranty">Warranty &amp; Returns</span></a>
+    <a href="#account" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="qc-label" data-i18n="qc.account">Account</span></a>
+    <a href="#gen1" class="qc-card"><span class="qc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="qc-label" data-i18n="qc.gen1">PopuPiano Owners</span></a>
+  </div>
+</div>
+
+<!-- MOST ASKED (TOP 10) -->
+<section class="most-asked">
+  <div class="most-asked-card">
+    <div class="most-asked-header">
+      <h3 data-i18n="popular.title">Most asked</h3>
+      <span class="badge" data-i18n="popular.badge">TOP 10</span>
+    </div>
+    <ol class="most-asked-list">
+      <li><a href="#qa-bt-fail"><span class="num">01</span><span class="q-text" data-i18n="qa.bt-fail.q">PartyKeys won't connect via Bluetooth</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-battery"><span class="num">02</span><span class="q-text" data-i18n="qa.battery.q">How long does the battery last and how do I charge it?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-app-devices"><span class="num">03</span><span class="q-text" data-i18n="qa.app-devices.q">What devices does the app support?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-q1"><span class="num">04</span><span class="q-text" data-i18n="qa.box.q">What's in the box?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-ps-connect"><span class="num">05</span><span class="q-text" data-i18n="qa.ps-connect.q">How do I connect PartyKeys to PartyStudio?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-app-daw"><span class="num">06</span><span class="q-text" data-i18n="qa.app-daw.q">Can I use my own DAW?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-key-feel"><span class="num">07</span><span class="q-text" data-i18n="qa.key-feel.q">Are the keys velocity-sensitive or weighted?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-warr-period"><span class="num">08</span><span class="q-text" data-i18n="qa.warr-period.q">What's the warranty period?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-return-policy"><span class="num">09</span><span class="q-text" data-i18n="qa.return-policy.q">Can I return for a refund?</span><span class="arrow">→</span></a></li>
+      <li><a href="#qa-q3"><span class="num">10</span><span class="q-text" data-i18n="qa.first-sound.q">How do I get my first sound out of PartyKeys?</span><span class="arrow">→</span></a></li>
+    </ol>
+  </div>
+</section>
+
+<main>
+
+<div class="translation-banner" data-i18n="banner.autotrans">Auto-translated content. We're working on native translations — feedback welcome at support@partykeys.com.</div>
+
+<!-- ============ QUICK START ============ -->
+<section class="section" id="quick-start">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-14 9V3z"/></svg></span><h2 data-i18n="sec.start.title">Quick Start</h2></div>
+  <p class="section-desc" data-i18n="sec.start.desc">First-time setup, what's in the box, and how to get sound out of PartyKeys in under 60 seconds.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-q1"><summary data-i18n="qa.box.q">What's in the box?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.box.a"><p class="placeholder">Final box contents are being confirmed before launch — pending SKU finalization.</p><p>Standard contents typically include the PartyKeys 36-key keyboard, a USB-C charging cable, and a printed quick-start guide. The PartyStudio speaker is sold separately or as a bundle, depending on the SKU you ordered.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-q2"><summary data-i18n="qa.power-on.q">How do I turn on PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.power-on.a"><p>Press and hold the power button for 3 seconds. The keys will light up in a colorful, breathing pattern — that means PartyKeys is on and ready to pair.</p><p>To turn it off, press and hold the power button for 3 seconds again.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-q3"><summary data-i18n="qa.first-sound.q">How do I get my first sound out of PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.first-sound.a"><p>PartyKeys is a MIDI keyboard — it doesn't generate sound on its own. There are three ways:</p><ol><li><strong>Tap to PartyStudio (easiest).</strong> Bring the NFC zones of PartyKeys and PartyStudio together. They connect automatically — no app needed.</li><li><strong>Bluetooth to the PopuMusic app.</strong> Open the app on your phone or tablet and connect from inside the app, not from your phone's Bluetooth settings.</li><li><strong>USB-C to a computer.</strong> Use any DAW like GarageBand, Logic Pro, Cubase, FL Studio, or Studio One.</li></ol></div></div>
+  </details>
+
+  <details class="qa" id="qa-q4"><summary data-i18n="qa.need-app.q">Do I need an app to use PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.need-app.a"><p>No. With a PartyStudio speaker, just tap-to-connect via NFC and start playing. The PopuMusic app is optional — it adds guided lessons (Game &amp; Course), sing-along mode (Play &amp; Sing), and music creation (Freeplay).</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-q5"><summary data-i18n="qa.download-app.q">Where do I download the PopuMusic app?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.download-app.a"><p>Search "PopuMusic" in the App Store (iOS) or Google Play (Android), or scan the QR code in your printed user manual.</p><div class="note"><strong>Compatibility.</strong> iPhone 12 or newer / iPad 8 or newer (iOS 16+), or Android 11 or newer. Mac with M-series chip can also run the iPad version.</div></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ PARTYKEYS KEYBOARD ============ -->
+<section class="section" id="partykeys">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M7 6v8M11 6v8M15 6v8M19 6v8"/></svg></span><h2 data-i18n="sec.keys.title">PartyKeys Keyboard</h2></div>
+  <p class="section-desc" data-i18n="sec.keys.desc">Hardware specs, the multi-function button, lighting, charging, and connecting multiple keyboards.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-keys-count"><summary data-i18n="qa.keys-count.q">How many keys does PartyKeys have?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.keys-count.a"><p>PartyKeys has <strong>36 keys (3 octaves)</strong> on a single board. You can magnetically connect up to 3 PartyKeys side-by-side — when paired with PartyStudio, they're treated as one continuous long keyboard.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-key-feel"><summary data-i18n="qa.key-feel.q">Are the keys velocity-sensitive or weighted?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.key-feel.a"><p>No. PartyKeys keys are unweighted and not velocity-sensitive — every press produces the same volume. This gives a consistent feel for performance and learning, and matches PartyKeys' philosophy of clarity over piano emulation.</p><p>If you need expressive dynamics for serious piano practice, an acoustic or weighted digital piano is a better fit.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-mpe"><summary data-i18n="qa.mpe.q">Does PartyKeys support MPE, aftertouch, or pitch bend?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.mpe.a"><p>Not in this model. PartyKeys is built around simplicity and an integrated, learning-focused experience. Advanced expressive features like MPE and aftertouch are something we're considering for future products — feedback welcome at <a href="mailto:support@partykeys.com">support@partykeys.com</a>.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-mfb"><summary data-i18n="qa.mfb.q">What does the multi-function button do?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.mfb.a"><p>The multi-function button (MFB) is the small square button next to the octave shift slider. It unlocks shortcuts so you don't have to open the app for common actions.</p><p><strong>Press once.</strong> The black keys light up to show available shortcuts.</p><p><strong>Hold MFB and press a black key:</strong></p><ul><li><strong>C# (left)</strong> — pair a wireless pedal</li><li><strong>D# (left)</strong> — enter / exit Play &amp; Sing mode</li><li><strong>F# / G# / A# (left)</strong> — drum fill-in / fill-in end / cut end</li><li><strong>C# / D# (middle)</strong> — volume up / down</li><li><strong>F# / G# / A# (middle)</strong> — timbre next / default / previous</li><li><strong>C# / D# (right)</strong> — switch dazzling modes</li><li><strong>F# / G# / A# (right)</strong> — color next / default / previous</li></ul><p>Release to return to playing.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-octave"><summary data-i18n="qa.octave.q">How do I shift octaves or transpose?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.octave.a"><p><strong>Shift octave.</strong> Tap the octave shift slider left or right (next to the power button).</p><p><strong>Transpose by semitone.</strong> Hold the multi-function button, then tap the slider left or right.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-battery"><summary data-i18n="qa.battery.q">How long does the battery last and how do I charge it?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.battery.a"><p><strong>Battery.</strong> 2200 mAh. <strong>Battery life.</strong> About 8 hours of typical use.</p><p><strong>Charging.</strong> ~1.5 hours from empty using the included USB-C cable and a 5V/2A adapter. PartyKeys supports PD fast charging and BC standard charging.</p><p>The charging indicator light glows white while charging, and turns off when full.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-fast-charge"><summary data-i18n="qa.fast-charge.q">Can I use a fast charger?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.fast-charge.a"><p>Yes. PartyKeys supports PD fast charging at 5V/2A. Use a safety-certified adapter — off-brand or non-compliant chargers can damage the device or fail to charge it.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-battery-check"><summary data-i18n="qa.battery-check.q">How do I check the battery level?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.battery-check.a"><p>With PartyKeys turned on, briefly press the power button. The keys light up green to show battery percentage in 20% steps (20% / 40% / 60% / 80% / 100%).</p><p>When battery drops below 10%, a flashing red light appears on the left side — time to charge.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-colors"><summary data-i18n="qa.colors.q">How many color themes does PartyKeys have?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.colors.a"><p><strong>Built into the keyboard.</strong> 12+ color themes you can cycle through with the MFB shortcut (hold MFB + right F# / G# / A#).</p><p><strong>Through the PopuMusic app.</strong> 100+ colors with per-key customization, scale visualization, and atmosphere skins. Tap the lightbulb icon on the app's home screen.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-dazzling"><summary data-i18n="qa.dazzling.q">How many dazzling (light show) modes are there?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.dazzling.a"><p>6+ dazzling modes at launch, with more added in future firmware updates. Switch between them by holding MFB + right C# / D#.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-startup-color"><summary data-i18n="qa.startup-color.q">Can I change the default startup color?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.startup-color.a"><p>Yes. After PartyKeys connects to PartyStudio or the PopuMusic app, set a custom default color through the app's lighting settings (lightbulb icon). The new default is remembered the next time you turn on PartyKeys.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-multi-keyboard"><summary data-i18n="qa.multi-kb.q">Can I connect multiple PartyKeys together?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.multi-kb.a"><p>Yes — up to 3 PartyKeys can be linked side-by-side using the magnetic connectors on each side.</p><ol><li>Place PartyKeys on a flat surface (uneven heights misalign the magnets).</li><li>Slide them together until the magnetic connectors snap.</li><li>Make sure all keyboards are powered on.</li><li>Connect to PartyStudio via NFC. PartyStudio treats the chain as one long keyboard and assigns each board a different color for identification.</li></ol></div></div>
+  </details>
+
+  <details class="qa" id="qa-keyboard-link-fail"><summary data-i18n="qa.kb-link-fail.q">The keyboards aren't recognizing each other when I link them.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.kb-link-fail.a"><ul><li>The infrared sensors on the left and right sides need a clear line of sight — make sure nothing is blocking them.</li><li>The magnetic connectors only align cleanly when both keyboards are at the same height. Use a flat, hard surface.</li><li>All keyboards must be powered on with enough battery.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-pedal"><summary data-i18n="qa.pedal.q">Can I use a sustain pedal?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.pedal.a"><p>PartyKeys supports a wireless pedal — currently in development, with a release date to be announced. Pair it by holding the multi-function button and pressing C# (left).</p><p>For wired sustain, plug a 3.5mm sustain pedal into the back of PartyStudio.</p></div></div>
+  </details>
+
+  </div>
+  <div class="section-cta"><span data-i18n="cta.notfound">Didn't find what you were looking for?</span><a href="mailto:support@partykeys.com" data-i18n="cta.email">Email support</a></div>
+</section>
+
+<!-- ============ PARTYSTUDIO ============ -->
+<section class="section" id="partystudio">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="9" cy="12" r="2.5"/><circle cx="16" cy="12" r="1.5"/></svg></span><h2 data-i18n="sec.studio.title">PartyStudio Speaker</h2></div>
+  <p class="section-desc" data-i18n="sec.studio.desc">The 70W hi-fi speaker with 128 instruments, 35+ drum patterns, and four ways to connect.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-ps-what"><summary data-i18n="qa.ps-what.q">What is PartyStudio?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-what.a"><p>PartyStudio is a <strong>70W RMS hi-fi Bluetooth speaker</strong> (2× 10W tweeters + 2× 25W mid-bass drivers) built specifically for PartyKeys. It contains:</p><ul><li><strong>128 built-in instruments</strong> — acoustic piano, guitars, synths, strings, brass, and more</li><li><strong>35+ drum machine rhythm patterns</strong> with adjustable BPM and fill-ins</li><li>A touchscreen with two rotary dials for hands-on control</li><li>USB MIDI, Bluetooth MIDI, 3.5mm audio out, and NFC tap-to-connect</li></ul><p>It also works as a regular Bluetooth speaker for streaming music from your phone.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-connect"><summary data-i18n="qa.ps-connect.q">How do I connect PartyKeys to PartyStudio?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-connect.a"><p><strong>Easiest — tap NFC.</strong> Bring the NFC zone on PartyKeys (right side of the top edge) close to the NFC zone on PartyStudio. They pair automatically.</p><p><strong>Wired alternative.</strong> Use a double-headed USB-C cable from PartyKeys' charging port to the MIDI port on PartyStudio's back.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-battery"><summary data-i18n="qa.ps-battery.q">How long does PartyStudio's battery last?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-battery.a"><p>About 8 hours of typical use, depending on volume and usage. Charging from empty takes ~3.5 hours. PartyStudio works while plugged in, so you can use it on AC power continuously for events or long sessions.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-charger"><summary data-i18n="qa.ps-charger.q">What charger does PartyStudio use?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-charger.a"><p>USB-C with PD support: 15V/2A, 12V/2A, 9V/2A, or 5V/2A. We recommend a safety-certified PD adapter for the fastest charging.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-instruments"><summary data-i18n="qa.ps-inst.q">How many instruments are built into PartyStudio?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-inst.a"><p><strong>128 timbres</strong>, organized into categories on the touchscreen. Browse them with the Instrument Dial — rotate to scroll, press to confirm.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-switch-instrument"><summary data-i18n="qa.ps-switch.q">How do I switch instruments?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-switch.a"><p>Move the Instrument Setting Slider to the middle position (instrument selection mode), then rotate the Instrument Dial to scroll. The current selection appears on the touchscreen. Press the dial to save your favorites for quick access.</p><p>The slider has three positions:</p><ul><li><strong>Top</strong> — volume</li><li><strong>Middle</strong> — instrument choice</li><li><strong>Bottom</strong> — transpose</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-drum"><summary data-i18n="qa.ps-drum.q">How do I use the drum machine?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-drum.a"><p>The drum machine is on the right side of PartyStudio.</p><ul><li><strong>Press the Drum Machine Dial once</strong> — start the drum machine</li><li><strong>Press once again while playing</strong> — trigger a fill-in</li><li><strong>Double-press</strong> — stop the drum machine</li></ul><p>The Drum Machine Setting Slider has three positions:</p><ul><li><strong>Top</strong> — volume</li><li><strong>Middle</strong> — BPM (tempo)</li><li><strong>Bottom</strong> — rhythm pattern (35+ to choose from)</li></ul><p>You can also trigger fill-ins from PartyKeys: hold MFB + F# (left) for fill-in, G# (left) for fill-in end, A# (left) to cut the end.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-headphones"><summary data-i18n="qa.ps-hp.q">Can I plug in headphones or external speakers?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-hp.a"><p>Yes. PartyStudio has a 3.5mm audio output jack on the back. Plug in headphones, a powered speaker, or a sound card.</p><div class="note"><strong>Note.</strong> The 3.5mm jack is output only — you can't use it as a microphone or audio input.</div></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-bt-music"><summary data-i18n="qa.ps-btm.q">Can I use PartyStudio as a Bluetooth speaker for music?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-btm.a"><p>Yes. PartyStudio supports standard Bluetooth audio. From your phone or tablet's Bluetooth settings, pair "PartyStudio" like any other Bluetooth speaker, then stream music, podcasts, or video audio normally.</p><p>This is independent of MIDI playback from PartyKeys — the two can run at the same time.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-other-midi"><summary data-i18n="qa.ps-other.q">Can I connect other MIDI keyboards (not just PartyKeys)?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-other.a"><p>Yes. PartyStudio supports any standard BLE MIDI or USB MIDI device.</p><ul><li><strong>Wired.</strong> USB-C cable into the MIDI port on the back.</li><li><strong>Wireless.</strong> Open the Explore menu on PartyStudio's touchscreen and pair via Bluetooth MIDI.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-multi-midi"><summary data-i18n="qa.ps-multi.q">How many MIDI devices can connect at once?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-multi.a"><p>Up to <strong>3 PartyKeys</strong> simultaneously via NFC / Bluetooth MIDI, plus <strong>1 standard MIDI device</strong> through the wired MIDI port — for a total of 4 inputs.</p><p>When multiple PartyKeys are connected, PartyStudio assigns each a different color for identification, and treats them as one long keyboard. Press the multi-function button on any PartyKeys to take control of PartyStudio's parameters.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-ps-touchscreen"><summary data-i18n="qa.ps-touch.q">What does the touchscreen do?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ps-touch.a"><p>Slide your finger along the <strong>edge of the screen</strong> to adjust overall speaker volume (clockwise = louder, counter-clockwise = softer). The center of the screen displays the current mode:</p><ul><li><strong>Instrument Settings</strong> — volume, instrument list, transpose</li><li><strong>Drum Machine Settings</strong> — volume, BPM, rhythm pattern</li><li><strong>Play &amp; Sing</strong> — chord progression, rhythm pattern</li><li><strong>Explore</strong> — Bluetooth pairing, settings, exploratory features</li></ul></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<section class="section" id="app">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></span><h2 data-i18n="sec.app.title">PopuMusic App</h2></div>
+  <p class="section-desc" data-i18n="sec.app.desc">Lessons, sing-along songs, music creation tools — and how the app fits with PartyKeys.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-app-name"><summary data-i18n="qa.app-name.q">Why is the app still called "PopuMusic" and not "PartyKeys"?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-name.a"><p>The current app is PopuMusic — it supports both PopuPiano (our previous keyboard) and the new PartyKeys lineup. We're rolling out new features over the next few releases and will rename the app to PartyKeys once it's complete.</p><p>Your account, courses, songs, and progress will carry over automatically when the rename happens.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-features"><summary data-i18n="qa.app-feat.q">What can the app do?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-feat.a"><p>Three main features for PartyKeys users:</p><ul><li><strong>Game &amp; Course</strong> — bite-sized lessons with light-guided learning. The keys light up to show you what to play.</li><li><strong>Play &amp; Sing</strong> — sing along to 400+ pop songs while PartyKeys lights up the chords for you. No music-reading required.</li><li><strong>Freeplay</strong> — pick from 38 sounds in the app, record up to 7 tracks, customize keyboard colors, and create your own music.</li></ul><p>The app also includes Pop Hits (waterfall sheet music), AIGC (AI song generation), tuners, metronome, and chord library.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-free"><summary data-i18n="qa.app-free.q">Is the app free?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-free.a"><p>Yes — PopuMusic is free, and there are no in-app subscriptions or paywalls. All courses and songs are included.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-devices"><summary data-i18n="qa.app-devices.q">What devices does the app support?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-devices.a"><ul><li><strong>iOS.</strong> iPhone 12 or newer / iPad 8 or newer (iOS 16+)</li><li><strong>Android.</strong> Android 11 or newer</li><li><strong>Mac.</strong> M-series Macs can run the iPad version from the Mac App Store</li></ul><p>The app currently does not support Windows tablets, Intel-based Macs, or Android emulators on PC.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-offline"><summary data-i18n="qa.app-offline.q">Can I use the app offline?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-offline.a"><p>No. The PopuMusic app needs an internet connection to load courses and song content from our servers. We're investigating offline modes for future releases.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-import"><summary data-i18n="qa.app-import.q">Can I import my own songs or MIDI files?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-import.a"><p>The app supports adding chord-and-lyric data for Play &amp; Sing mode (no melody import yet). For full MIDI playback, we recommend Synthesia, which is compatible with PartyKeys as a standard MIDI keyboard.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-daw"><summary data-i18n="qa.app-daw.q">Can I use my own DAW (GarageBand, Logic, Cubase, FL Studio)?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-daw.a"><p>Yes. PartyKeys is a standard USB MIDI keyboard and works in any DAW. Connect with a USB-C data cable (make sure the cable supports data transfer, not just charging).</p><p>Officially tested DAWs: <strong>GarageBand, Logic Pro, Cubase, FL Studio, Studio One</strong>. Other MIDI-compatible software should work as well.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-courses"><summary data-i18n="qa.app-courses.q">How many courses are in the app?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-courses.a"><p>7 chapter-based courses, designed to take a beginner from first key press to playing complete songs:</p><ol><li>The Basics</li><li>Finger Skills</li><li>Chords</li><li>Both Hands</li><li>Sing Along</li><li>Piano Solo</li><li>Advanced Keyboard</li></ol><p>New courses and songs are added regularly. Have a request? Email <a href="mailto:support@partykeys.com">support@partykeys.com</a>.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-languages"><summary data-i18n="qa.app-langs.q">What languages does the app support?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-langs.a"><p>English, Simplified Chinese, Traditional Chinese, Spanish, Japanese, Korean, Vietnamese, and Turkish. More languages added based on demand.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-app-record"><summary data-i18n="qa.app-record.q">Can I record audio or vocals in the app?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.app-record.a"><p>Freeplay records up to 7 tracks of MIDI playback through the app's built-in instruments. The app cannot record vocals (no microphone input).</p><p>To save your composition as an audio file, screen-record on your phone — the resulting MP4 will include the audio.</p></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ TROUBLESHOOTING ============ -->
+<section class="section" id="troubleshooting">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span><h2 data-i18n="sec.trouble.title">Troubleshooting</h2></div>
+  <p class="section-desc" data-i18n="sec.trouble.desc">If something isn't working — start here.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-bt-fail"><summary data-i18n="qa.bt-fail.q">PartyKeys won't connect via Bluetooth.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.bt-fail.a"><p>Try these in order:</p><ol><li>Connect through the <strong>PopuMusic app</strong>, not your phone's Bluetooth settings. Bluetooth MIDI doesn't appear in the system Bluetooth list on most phones.</li><li>Make sure PartyKeys is on. Press the power button for 3 seconds — when keys show a colorful breathing pattern, it's ready to pair.</li><li>Charge PartyKeys if battery is low.</li><li>Disconnect any other Bluetooth devices (headphones, speakers) that might be holding the channel, toggle Bluetooth off and on, then retry.</li><li><strong>Android only.</strong> Turn on Location Services and grant the PopuMusic app location permission. Bluetooth MIDI scanning requires it.</li></ol></div></div>
+  </details>
+
+  <details class="qa" id="qa-nfc-fail"><summary data-i18n="qa.nfc-fail.q">NFC tap isn't connecting PartyKeys to PartyStudio.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.nfc-fail.a"><ul><li>Make sure PartyKeys is powered on with battery.</li><li>If PartyKeys is already connected to your phone via Bluetooth, disconnect first — it can only pair to one host at a time.</li><li>Bring the NFC zones close (less than 2 cm apart) and hold steady for ~1 second.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-pc-fail"><summary data-i18n="qa.pc-fail.q">PartyKeys won't work or lights flicker when I connect to my PC.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.pc-fail.a"><ul><li><strong>USB 3.0 port.</strong> Use a USB 3.0 (blue) port on your computer. USB 2.0 sometimes can't supply stable power.</li><li><strong>MIDI support.</strong> Confirm your DAW or software is set up to receive MIDI from PartyKeys (in DAW settings → MIDI input devices).</li><li><strong>Cable check.</strong> Some USB-C cables only carry power, not data. Use the cable that came with PartyKeys, or a known data cable.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-no-response"><summary data-i18n="qa.no-resp.q">I press a key but nothing happens.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.no-resp.a"><ol><li>If using PartyStudio, check the speaker is on and the touchscreen edge volume isn't muted (slide clockwise to raise).</li><li>If using the PopuMusic app, confirm the app shows PartyKeys as connected (Bluetooth icon).</li><li>Power-cycle PartyKeys — hold power 3 seconds to turn off, wait 5 seconds, hold 3 seconds to turn on.</li><li>If a single specific key is silent, see the next question.</li></ol></div></div>
+  </details>
+
+  <details class="qa" id="qa-dead-key"><summary data-i18n="qa.dead-key.q">One specific key isn't producing sound.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.dead-key.a"><p>Power-cycle PartyKeys first. If the key still doesn't respond — and other keys do — it's likely a hardware defect.</p><p>Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> with:</p><ul><li>Your order number</li><li>A short video showing the silent key</li></ul><p>We'll arrange a free replacement under warranty within 1 business day.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-no-sound-ps"><summary data-i18n="qa.no-sound-ps.q">There's no sound coming out of PartyStudio.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.no-sound-ps.a"><ul><li>Slide along the touchscreen edge clockwise to raise volume.</li><li>Check whether something is plugged into the 3.5mm audio output jack — if so, sound routes to that device instead of PartyStudio's speakers.</li><li>Make sure PartyKeys is connected (NFC tap or Bluetooth) and an instrument is selected.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-bt-find"><summary data-i18n="qa.bt-find.q">My phone's Bluetooth can't find PartyStudio.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.bt-find.a"><p>PartyStudio may already be paired to another device. Open the Explore menu on PartyStudio's touchscreen, disable auto-connection or manually disconnect the other device, then retry pairing from your phone.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-latency"><summary data-i18n="qa.latency.q">There's a noticeable lag between key press and sound (Android).</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.latency.a"><p>Bluetooth MIDI latency varies by device and Android version:</p><ul><li>Well-optimized phones: 50–80ms (imperceptible to most listeners)</li><li>Less-optimized phones: up to 200ms (noticeable)</li></ul><p>For the lowest latency, connect PartyKeys with a USB-C cable instead of Bluetooth — wired latency is ~20ms. Or use PartyStudio (NFC connection), which is also very low latency.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-latency-ios"><summary data-i18n="qa.latency-ios.q">I notice slight lag on iOS / iPad.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.latency-ios.a"><p>iOS Bluetooth MIDI latency is typically very low (~50ms) and most users don't notice. If you do:</p><ul><li>Switch to a USB-C wired connection.</li><li>Make sure no other Bluetooth devices are competing (close apps using Bluetooth in the background).</li><li>Restart the PopuMusic app.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-reset"><summary data-i18n="qa.reset.q">How do I reset PartyKeys if it stops responding?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.reset.a"><p>Long-press the power button for <strong>15 seconds</strong> to force a reset. If PartyKeys still doesn't respond, charge for at least 30 minutes (the battery may be fully drained — at very low levels it won't power on instantly even when plugged in), then try again.</p><p>Still stuck? Email <a href="mailto:support@partykeys.com">support@partykeys.com</a>.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-charge-issue"><summary data-i18n="qa.charge-issue.q">PartyKeys isn't charging.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.charge-issue.a"><ol><li>Confirm your adapter is 5V/2A (or higher PD) and safety-certified. Voltages lower than 5V won't charge PartyKeys.</li><li>Try a different USB-C cable — some cables are charge-only and don't fit our charging spec.</li><li>Test the adapter with another device (like your phone) to confirm it's working.</li><li>If the charging indicator behaves erratically, force-reset by holding the power button for 15 seconds.</li></ol></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ COMPATIBILITY ============ -->
+<section class="section" id="compatibility">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></span><h2 data-i18n="sec.compat.title">Device Compatibility</h2></div>
+  <p class="section-desc" data-i18n="sec.compat.desc">Whether your phone, tablet, or computer works with PartyKeys.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-compat-phones"><summary data-i18n="qa.compat-phones.q">What phones and tablets are supported?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.compat-phones.a"><ul><li><strong>iOS.</strong> iPhone 12 or newer, iPad 8 or newer, running iOS 16 or later</li><li><strong>Android.</strong> Android 11 or later (most flagship phones from 2020 onward)</li><li><strong>Mac.</strong> M-series Macs can install the iPad version from the Mac App Store</li></ul><p>Bluetooth 4.0 BLE is required. Devices that don't support BLE MIDI can still use PartyKeys via USB-C cable.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-compat-old"><summary data-i18n="qa.compat-old.q">My phone is older than the supported list. Can I still use PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.compat-old.a"><p>Yes. PartyKeys is a <strong>standard USB MIDI keyboard</strong> — connect it to a Mac or Windows computer with a USB-C data cable and use any DAW. Officially tested:</p><ul><li>GarageBand (Mac, free)</li><li>Logic Pro (Mac)</li><li>Cubase</li><li>FL Studio</li><li>Studio One</li></ul><p>You can also pair PartyKeys with PartyStudio via NFC for app-free playing.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-compat-windows"><summary data-i18n="qa.compat-win.q">Is there a Windows version of the PopuMusic app?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.compat-win.a"><p>Not yet. The PopuMusic app currently runs on iOS, iPadOS, Android, and M-series Mac.</p><p>For Windows users, PartyKeys works as a USB MIDI controller in any Windows DAW — that's the recommended path.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-compat-fire"><summary data-i18n="qa.compat-fire.q">Will the app work on Amazon Fire / Pixel / less common Android tablets?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.compat-fire.a"><p>Theoretically any Android device running Android 11+ should work, but we haven't tested every model. Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> with your tablet's exact model and we'll check our compatibility list.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-compat-emulator"><summary data-i18n="qa.compat-emu.q">Can I use an Android emulator on my PC?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.compat-emu.a"><p>Unfortunately no. Android emulators on PC don't relay MIDI signals correctly, so the app can't communicate with PartyKeys through them. Use a real Android device, an iOS device, or a Mac with M-series chip.</p></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ WARRANTY ============ -->
+<section class="section" id="warranty">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg></span><h2 data-i18n="sec.warr.title">Warranty &amp; Returns</h2></div>
+  <p class="section-desc" data-i18n="sec.warr.desc">1-year warranty, 7-day no-reason returns, and how to request service.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-warr-period"><summary data-i18n="qa.warr-period.q">What's the warranty period?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.warr-period.a"><p><strong>1 year</strong> from the date of original purchase from an authorized dealer (Amazon, our independent site, or licensed resellers). Keep your proof of purchase — we may ask for it when processing a claim.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-warr-covered"><summary data-i18n="qa.warr-cov.q">What's covered by the warranty?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.warr-cov.a"><p>Manufacturing defects, including:</p><ul><li>Functions listed in the manual not working</li><li>Keyboard does not power on, or cannot connect to phones / PartyStudio</li><li>Cannot reset, restart, or turn on with sufficient battery</li><li>Other hardware defects causing function failure</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-warr-not-covered"><summary data-i18n="qa.warr-not.q">What's not covered?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.warr-not.a"><ul><li>Disassembled or modified units</li><li>Accidental damage, negligence, or misuse</li><li>Normal wear and tear (surface scratches, key discoloration)</li><li>Purchases from unauthorized resellers</li><li>Shipping damage (refuse delivery and contact us — we'll re-ship)</li><li>Damage from extreme heat / cold / humidity / direct sunlight</li><li>Beyond the 1-year warranty period</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-return-policy"><summary data-i18n="qa.return-policy.q">Can I return for a refund?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.return-policy.a"><p><strong>7-day no-reason returns</strong> for unused or like-new products. After 7 days, returns are evaluated case-by-case (we're flexible — just reach out).</p><p>Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> with your order number to start.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-return-shipping"><summary data-i18n="qa.return-ship.q">Who pays for return shipping?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.return-ship.a"><ul><li><strong>Manufacturing defects within warranty.</strong> We cover return shipping and send a replacement.</li><li><strong>Buyer's-remorse / no-reason returns.</strong> Buyer pays return shipping.</li></ul></div></div>
+  </details>
+
+  <details class="qa" id="qa-return-address"><summary data-i18n="qa.return-addr.q">Where do I ship a return to?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.return-addr.a"><p>Email us first at <a href="mailto:support@partykeys.com">support@partykeys.com</a> — return addresses vary by region (US, EU, Asia). Don't ship without a return authorization; un-coordinated returns can get lost in transit.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-damaged"><summary data-i18n="qa.damaged.q">The package arrived damaged.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.damaged.a"><p><strong>If you can refuse delivery.</strong> Refuse to sign and ask the carrier to return the package to sender. Contact us with photos.</p><p><strong>If you've already signed.</strong> Still contact us with photos of the damage (box and product) within 24 hours. We'll handle the carrier claim and ship a replacement.</p><p>Don't sign as "received in good condition" without inspecting — if you sign and find damage later, the carrier may refuse the claim.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-shipping-time"><summary data-i18n="qa.ship-time.q">How long does shipping take?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.ship-time.a"><p class="placeholder">Shipping times by region are being finalized — will update on launch. Estimated: US 3–7 business days, EU 5–10 business days, rest of world 7–14 business days.</p></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ ACCOUNT ============ -->
+<section class="section" id="account">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><h2 data-i18n="sec.acc.title">Account &amp; Login</h2></div>
+  <p class="section-desc" data-i18n="sec.acc.desc">Password resets, email changes, and account recovery.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-acc-login"><summary data-i18n="qa.acc-login.q">I can't log into the app.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.acc-login.a"><ol><li>Try "Forgot Password" in the app to reset.</li><li>If you don't receive the verification email within 5 minutes, check spam folders.</li><li>Still stuck? Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> with your registered email and a screenshot of your account ID (tap your avatar inside the app to find it).</li></ol><p>We respond within 24 hours.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-acc-progress"><summary data-i18n="qa.acc-prog.q">I reinstalled the app and lost my courses and progress.</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.acc-prog.a"><p>Your progress is tied to your account, not the device. Sign in with the same email or Facebook account, and your courses, progress, and atmosphere skins will sync back.</p><p>If you sign in and they're still missing, email us with your account ID and we'll restore them.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-acc-email"><summary data-i18n="qa.acc-email.q">How do I change my email address?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.acc-email.a"><p>In the app, tap your avatar → Edit Profile → Change Email. Follow the verification steps.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-acc-multi"><summary data-i18n="qa.acc-multi.q">Can multiple accounts share one PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.acc-multi.a"><p>Yes. PartyKeys is a hardware MIDI device — anyone can pair it to their phone. Each user's app account stores their own progress, courses, and unlocks separately.</p></div></div>
+  </details>
+
+  </div>
+</section>
+
+<!-- ============ GEN1 ============ -->
+<section class="section" id="gen1">
+  <div class="section-header"><span class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><h2 data-i18n="sec.gen1.title">For PopuPiano Owners</h2></div>
+  <p class="section-desc" data-i18n="sec.gen1.desc">If you own PopuPiano, here's how PartyKeys differs and what carries over.</p>
+  <div class="qa-list">
+
+  <details class="qa" id="qa-gen1-upgrade"><summary data-i18n="qa.gen1-upg.q">I own a PopuPiano. Should I upgrade to PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.gen1-upg.a"><p>Two big reasons to upgrade:</p><ol><li><strong>Self-contained sound.</strong> PartyKeys + PartyStudio gives you a 70W hi-fi speaker with 128 instruments and 35+ drum patterns built in — no app or laptop required to play. Just tap to connect via NFC and you're playing.</li><li><strong>Cleaner hardware design.</strong> A single 36-key board with magnetic side connectors (up to 3 boards), instead of 29 keys + ChordPad + extension. The ChordPad's chord shortcuts are now built into Play &amp; Sing mode and the multi-function button.</li></ol><p><strong>Reasons to keep PopuPiano.</strong> If you love the ChordPad's tactile chord strips, or your workflow depends on PopuSound's 10 instruments — PopuPiano still works great. The PopuMusic app continues to support both.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-gen1-app"><summary data-i18n="qa.gen1-app.q">Will the PopuMusic app work with PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.gen1-app.a"><p>Yes — the same PopuMusic app supports both PopuPiano and PartyKeys. Switch between them in the "Select Instrument" screen on the app's home page.</p><p>Your account, courses, and progress are shared across both keyboards.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-gen1-popusound"><summary data-i18n="qa.gen1-ps.q">Is my PopuSound speaker compatible with PartyKeys?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.gen1-ps.a"><p>No. PopuSound was designed specifically for PopuPiano with its own protocol and 10 built-in sounds. PartyKeys uses NFC + USB MIDI to communicate with PartyStudio, which has 128 instruments and a different sound engine. The two systems aren't cross-compatible.</p></div></div>
+  </details>
+
+  <details class="qa" id="qa-gen1-support"><summary data-i18n="qa.gen1-sup.q">I have a PopuPiano question — where do I get support?</summary>
+    <div class="answer-wrap"><div class="answer" data-i18n="qa.gen1-sup.a"><p>For PopuPiano specifically, the legacy support email <a href="mailto:support@popumusic.com">support@popumusic.com</a> still works. We're consolidating all customer support to <a href="mailto:support@partykeys.com">support@partykeys.com</a> — emails to either address reach the same team.</p></div></div>
+  </details>
+
+  </div>
+</section>
+
+<div id="no-results"><p data-i18n="noresults.text">No results found.<br/>Try a different search, or email <a href="mailto:support@partykeys.com">support@partykeys.com</a>.</p></div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="contact-card">
+    <h3 data-i18n="footer.title">Still need help?</h3>
+    <p data-i18n="footer.desc">Send us your order number and we'll respond within 24 hours.</p>
+    <a class="contact-btn" href="mailto:support@partykeys.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span data-i18n="footer.btn">Email support</span></a>
+  </div>
+  <p class="legal" data-i18n="footer.legal">© PartyKeys, made by PopuMusic. Last updated <span id="last-updated">2026</span>. Email <a href="mailto:support@partykeys.com">support@partykeys.com</a> for any feedback.</p>
+</footer>
+
+<a href="mailto:support@partykeys.com" class="floating-contact" id="floating-contact" aria-label="Email support">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</a>
+
+<script>
+window.I18N = {
+"zh-CN": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保修",
+"hero.eyebrow":"PartyKeys 客户支持","hero.title":"有什么可以帮你？","hero.subtitle":"关于 PartyKeys、PartyStudio、PopuMusic App、连接和保修的快速答疑。",
+"search.placeholder":"搜索问题",
+"chip.bluetooth":"蓝牙","chip.charging":"充电","chip.return":"退货","chip.compat":"机型兼容","chip.drum":"鼓机",
+"qc.start":"快速上手","qc.keys":"PartyKeys 键盘","qc.studio":"PartyStudio 音响","qc.app":"PopuMusic App","qc.trouble":"故障排查","qc.warranty":"保修与退货","qc.account":"账号","qc.gen1":"PopuPiano 老用户",
+"popular.title":"热门问题","popular.badge":"TOP 10",
+"sec.start.title":"快速上手","sec.start.desc":"开箱、开机、60 秒内让 PartyKeys 出声。",
+"sec.keys.title":"PartyKeys 键盘","sec.keys.desc":"硬件参数、多功能键、灯效、充电、多块拼接。",
+"sec.studio.title":"PartyStudio 音响","sec.studio.desc":"70W 高保真音响，128 种音色，35+ 种鼓机节奏。",
+"sec.app.title":"PopuMusic App","sec.app.desc":"课程、跟唱、创作工具——以及 App 与 PartyKeys 的关系。",
+"sec.trouble.title":"故障排查","sec.trouble.desc":"哪里卡住了？从这里开始。",
+"sec.compat.title":"设备兼容性","sec.compat.desc":"你的手机、平板或电脑是否支持 PartyKeys。",
+"sec.warr.title":"保修与退货","sec.warr.desc":"1 年保修、7 天无理由退货、如何申请售后。",
+"sec.acc.title":"账号与登录","sec.acc.desc":"密码、邮箱、账号恢复。",
+"sec.gen1.title":"给 PopuPiano 老用户","sec.gen1.desc":"二者差异点和迁移说明。",
+"cta.notfound":"没找到你想问的？","cta.email":"发邮件给我们",
+"noresults.text":"没有找到结果。<br/>换个关键词，或发邮件给 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
+"footer.title":"还需要帮助？","footer.desc":"把订单号发给我们，24 小时内回复。","footer.btn":"发邮件",
+"footer.legal":"© PartyKeys，由 PopuMusic 出品。最后更新 <span id=\"last-updated\">2026</span>。反馈请发 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
+"fb.helpful":"这个回答有用吗？","fb.thanks":"感谢你的反馈。",
+"banner.autotrans":"机器辅助翻译，欢迎指正：support@partykeys.com",
+"search.hint":"按","search.hint2":"提问 AI · 输入即过滤",
+"ask.sources":"参考来源","ask.related":"相关问题","ask.helpful":"这个回答有帮助吗？","ask.thanks":"感谢反馈。","ask.close":"关闭","ask.thinking":"思考中…",
+"qa.bt-fail.q":"PartyKeys 蓝牙连不上",
+"qa.bt-fail.a":"<p>请按顺序排查：</p><ol><li>从 <strong>PopuMusic App</strong> 内连接，<strong>不要</strong>从手机系统蓝牙设置里连。多数手机的系统蓝牙列表里看不到 BLE MIDI 设备。</li><li>确认 PartyKeys 已开机：长按电源键 3 秒，琴键呈彩色呼吸状=待配对。</li><li>电量低时请充电后再试。</li><li>断开占用蓝牙信道的耳机/音响等设备，关闭再打开蓝牙重试。</li><li><strong>仅安卓</strong>：开启定位服务并允许 PopuMusic App 使用位置权限。蓝牙 MIDI 扫描需要这个权限。</li></ol>",
+"qa.battery.q":"电池能用多久？怎么充电？",
+"qa.battery.a":"<p><strong>电池</strong> 2200 mAh。<strong>续航</strong> 约 8 小时正常使用。</p><p><strong>充电</strong> 用随附 USB-C 线 + 5V/2A 适配器，约 1.5 小时充满。支持 PD 快充和 BC 标准充。</p><p>充电时白色指示灯亮起，充满熄灭。</p>",
+"qa.app-devices.q":"App 支持哪些设备？",
+"qa.app-devices.a":"<ul><li><strong>iOS：</strong>iPhone 12 及更新机型 / iPad 8 及更新机型（iOS 16+）</li><li><strong>Android：</strong>Android 11 及以上</li><li><strong>Mac：</strong>M 系列芯片 Mac 可在 Mac App Store 安装 iPad 版</li></ul><p>暂不支持 Windows 平板、Intel 芯片 Mac、PC 上的安卓模拟器。</p>",
+"qa.box.q":"包装里有什么？",
+"qa.box.a":"<p class=\"placeholder\">最终包装清单将在上市前确认 — 等 SKU 拍板。</p><p>标准配置通常包含 PartyKeys 36 键键盘、USB-C 充电线、纸质快速指南。PartyStudio 音响根据你下单的 SKU 单独购买或捆绑销售。</p>",
+"qa.ps-connect.q":"PartyKeys 怎么连 PartyStudio？",
+"qa.ps-connect.a":"<p><strong>最简单 — NFC 一碰。</strong>把 PartyKeys 顶部右侧的 NFC 区域贴近 PartyStudio 上的 NFC 区域，自动配对。</p><p><strong>有线方式。</strong>用一根双头 USB-C 线，从 PartyKeys 的充电口接到 PartyStudio 后面的 MIDI 口。</p>",
+"qa.app-daw.q":"我能用自己的 DAW 吗？",
+"qa.app-daw.a":"<p>可以。PartyKeys 是标准 USB MIDI 键盘，任何 DAW 都能识别。用 USB-C 数据线接到电脑（注意要用支持数据传输的线，不是仅充电线）。</p><p>官方测试过的 DAW：<strong>GarageBand、Logic Pro、Cubase、FL Studio、Studio One</strong>。其他兼容 MIDI 的软件理论上都能用。</p>",
+"qa.key-feel.q":"琴键有力度感应或配重吗？",
+"qa.key-feel.a":"<p>没有。PartyKeys 的琴键不带配重、也不带力度感应——每次按压音量一致。这种一致性更适合表演和学习，但和真实钢琴的手感不同。</p><p>如果你需要表现力度变化的严肃钢琴练习，建议另选带配重的电钢琴或真钢琴。</p>",
+"qa.warr-period.q":"保修期是多久？",
+"qa.warr-period.a":"<p><strong>1 年</strong>，从授权经销商（亚马逊、官网或授权代理商）原始购买日起算。请保留购买凭证，售后申请时可能会用到。</p>",
+"qa.return-policy.q":"可以退货退款吗？",
+"qa.return-policy.a":"<p><strong>7 天无理由退货</strong>，针对未使用或近全新状态的产品。超过 7 天我们也愿意逐单评估，先联系我们再说。</p><p>发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a> 并附订单号，我们启动流程。</p>",
+"qa.first-sound.q":"PartyKeys 第一次怎么出声？",
+"qa.first-sound.a":"<p>PartyKeys 是 MIDI 键盘——本身不发声。三种方式：</p><ol><li><strong>碰一下 PartyStudio（最简单）。</strong>把 PartyKeys 和 PartyStudio 的 NFC 区贴近，自动配对，无需 App。</li><li><strong>蓝牙连 PopuMusic App。</strong>打开 App 内连接（不要从手机系统蓝牙连）。</li><li><strong>USB-C 接电脑。</strong>配合 GarageBand、Logic Pro、Cubase、FL Studio、Studio One 等任何 DAW。</li></ol>",
+"qa.power-on.q":"PartyKeys 怎么开机？",
+"qa.power-on.a":"<p>长按电源键 3 秒。琴键亮起呈彩色呼吸状即代表开机成功，进入待配对状态。</p><p>关机：再次长按电源键 3 秒。</p>",
+"qa.need-app.q":"必须装 App 才能用吗？",
+"qa.need-app.a":"<p>不必。配 PartyStudio 的话，NFC 一碰就能弹。PopuMusic App 是可选的——它提供课程（Game & Course）、跟唱（Play & Sing）、创作（Freeplay）。</p>",
+"qa.download-app.q":"PopuMusic App 在哪下载？",
+"qa.download-app.a":"<p>在 App Store（iOS）或 Google Play（Android）搜索 \"PopuMusic\"，或扫描纸质说明书上的二维码。</p><div class=\"note\"><strong>兼容性。</strong>iPhone 12 / iPad 8 及更新机型（iOS 16+），或 Android 11 及以上。M 系列芯片 Mac 也能装 iPad 版。</div>",
+"qa.keys-count.q":"PartyKeys 有几个键？",
+"qa.keys-count.a":"<p>PartyKeys 单板 <strong>36 键（3 个八度）</strong>。最多 3 块磁吸拼接，连到 PartyStudio 时识别为一长条键盘。</p>",
+"qa.mpe.q":"支持 MPE / 触后 / 弯音吗？",
+"qa.mpe.a":"<p>本款不支持。PartyKeys 走的是简洁、面向学习的整体体验路线。MPE、aftertouch 等高级表现力是我们正在为后续型号考虑的方向——欢迎反馈到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。</p>",
+"qa.mfb.q":"多功能键（MFB）能干嘛？",
+"qa.mfb.a":"<p>多功能键（MFB）是电源键和八度滑块旁边的小方形键。它解锁了一组黑键快捷键，让你不必打开 App 就能调常用功能。</p><p><strong>按一下：</strong>所有黑键亮起显示可用的快捷键。</p><p><strong>按住 MFB + 黑键：</strong></p><ul><li><strong>左 C#</strong> — 配对无线踏板</li><li><strong>左 D#</strong> — 进/出 Play & Sing 模式</li><li><strong>左 F# / G# / A#</strong> — 鼓机 fill-in / fill-in 结束 / 直接结束</li><li><strong>中 C# / D#</strong> — 音量 +/-</li><li><strong>中 F# / G# / A#</strong> — 音色 切换 / 默认 / 上一个</li><li><strong>右 C# / D#</strong> — 切换炫光模式</li><li><strong>右 F# / G# / A#</strong> — 颜色 切换 / 默认 / 上一个</li></ul><p>松开后回到正常演奏。</p>",
+"qa.octave.q":"怎么切换八度或移调？",
+"qa.octave.a":"<p><strong>切换八度。</strong>电源键旁的滑块向左或向右拨。</p><p><strong>半音移调。</strong>按住多功能键，再向左或向右拨滑块。</p>",
+"qa.fast-charge.q":"能用快充充电器吗？",
+"qa.fast-charge.a":"<p>可以。PartyKeys 支持 PD 快充，5V/2A。请使用经过安全认证的适配器——三无品牌或不达标的充电器可能损坏设备或无法充电。</p>",
+"qa.battery-check.q":"怎么看电量？",
+"qa.battery-check.a":"<p>开机状态下，短按一下电源键，琴键以绿色显示电量百分比（20% / 40% / 60% / 80% / 100%）。</p><p>电量低于 10% 时，键盘左侧闪烁红灯——该充电了。</p>",
+"qa.colors.q":"PartyKeys 有多少种颜色主题？",
+"qa.colors.a":"<p><strong>键盘内置：</strong>12+ 种颜色主题，用 MFB 黑键快捷键循环切换（按住 MFB + 右 F# / G# / A#）。</p><p><strong>App 内：</strong>100+ 种颜色，可单键自定义、显示音阶、应用氛围皮肤。点击 App 主页的灯泡图标。</p>",
+"qa.dazzling.q":"有几种炫光（Dazzling）模式？",
+"qa.dazzling.a":"<p>上市时 6+ 种，后续固件更新会持续增加。按住 MFB + 右 C# / D# 切换。</p>",
+"qa.startup-color.q":"能改默认开机色吗？",
+"qa.startup-color.a":"<p>可以。PartyKeys 连上 PartyStudio 或 PopuMusic App 后，进 App 灯效设置（灯泡图标）改默认色。下次开机会记住设置。</p>",
+"qa.multi-kb.q":"多块 PartyKeys 能拼吗？",
+"qa.multi-kb.a":"<p>可以——最多 3 块 PartyKeys 通过两侧磁吸接口拼成一长条。</p><ol><li>放在平整桌面（高低不平会导致磁吸错位）。</li><li>横向滑动直至磁吸卡紧。</li><li>所有键盘都要开机。</li><li>用 NFC 连到 PartyStudio。PartyStudio 会把这一串当作一个长键盘，并给每块分配不同颜色以便识别。</li></ol>",
+"qa.kb-link-fail.q":"两块拼起来没反应怎么办？",
+"qa.kb-link-fail.a":"<ul><li>左右两侧的红外感应区不能被任何东西遮挡（贴纸、灰尘、保护套边缘等）。</li><li>磁吸接口需要两块键盘等高才能对齐——请用平整、硬质的桌面。</li><li>所有键盘都必须开机且电量充足。</li></ul>",
+"qa.pedal.q":"能接延音踏板吗？",
+"qa.pedal.a":"<p>PartyKeys 支持无线踏板——目前仍在研发，发售时间待定。配对方法：按住多功能键 + 左 C#。</p><p>有线踏板：插入 PartyStudio 后面的 3.5mm 延音踏板插孔。</p>",
+"qa.ps-what.q":"PartyStudio 是什么？",
+"qa.ps-what.a":"<p>PartyStudio 是为 PartyKeys 量身打造的 <strong>70W RMS 高保真蓝牙音响</strong>（2× 10W 高音 + 2× 25W 中低音）。它包含：</p><ul><li><strong>128 种内置音色</strong> — 钢琴、吉他、合成器、弦乐、铜管等</li><li><strong>35+ 种鼓机节奏型</strong>，可调 BPM 和加花</li><li>触摸屏 + 双旋钮，所有控制都在手边</li><li>USB MIDI、蓝牙 MIDI、3.5mm 音频输出、NFC 一碰即连</li></ul><p>它也是普通蓝牙音响，可以直接放手机里的音乐。</p>",
+"qa.ps-battery.q":"PartyStudio 续航多久？",
+"qa.ps-battery.a":"<p>正常使用约 8 小时，依音量和使用强度而定。从空到满约 3.5 小时。可以一边充电一边使用——长时间活动直接接电源即可。</p>",
+"qa.ps-charger.q":"PartyStudio 用什么充电器？",
+"qa.ps-charger.a":"<p>USB-C 接口，支持 PD：15V/2A、12V/2A、9V/2A 或 5V/2A。建议用安全认证的 PD 适配器以获得最快充电速度。</p>",
+"qa.ps-inst.q":"PartyStudio 内置多少音色？",
+"qa.ps-inst.a":"<p><strong>128 种音色</strong>，分类显示在触摸屏上。用乐器旋钮浏览——旋转选择，按下确认。</p>",
+"qa.ps-switch.q":"怎么换音色？",
+"qa.ps-switch.a":"<p>把乐器滑块拨到中间位置（音色选择模式），旋转乐器旋钮浏览。当前选中的音色显示在触摸屏上。按下旋钮可保存为收藏，下次快速调用。</p><p>滑块三档：</p><ul><li><strong>顶部</strong> — 音量</li><li><strong>中间</strong> — 选择音色</li><li><strong>底部</strong> — 移调</li></ul>",
+"qa.ps-drum.q":"鼓机怎么用？",
+"qa.ps-drum.a":"<p>鼓机在 PartyStudio 右侧。</p><ul><li><strong>按一下鼓机旋钮</strong> — 启动鼓机</li><li><strong>启动状态下再按一次</strong> — 触发加花（fill-in）</li><li><strong>双击</strong> — 停止鼓机</li></ul><p>鼓机滑块三档：</p><ul><li><strong>顶部</strong> — 音量</li><li><strong>中间</strong> — BPM</li><li><strong>底部</strong> — 节奏型（35+ 种可选）</li></ul><p>也可以从 PartyKeys 触发：按住 MFB + 左 F#（加花）/ 左 G#（加花结束）/ 左 A#（直接收尾）。</p>",
+"qa.ps-hp.q":"能接耳机或外接音响吗？",
+"qa.ps-hp.a":"<p>可以。PartyStudio 后面有 3.5mm 音频输出口。可接耳机、有源音箱、声卡。</p><div class=\"note\"><strong>注意。</strong>3.5mm 是输出口——不能用作麦克风或音频输入。</div>",
+"qa.ps-btm.q":"PartyStudio 能当蓝牙音响放音乐吗？",
+"qa.ps-btm.a":"<p>可以。PartyStudio 支持标准蓝牙音频。在手机/平板的系统蓝牙设置中配对 \"PartyStudio\"，像普通蓝牙音箱一样使用即可——音乐、播客、视频音频都行。</p><p>这和 PartyKeys 的 MIDI 通道独立，可同时进行。</p>",
+"qa.ps-other.q":"能接其他 MIDI 键盘（不是 PartyKeys）吗？",
+"qa.ps-other.a":"<p>可以。PartyStudio 兼容任何标准 BLE MIDI 或 USB MIDI 设备。</p><ul><li><strong>有线：</strong>USB-C 线插到背面 MIDI 口。</li><li><strong>无线：</strong>在 PartyStudio 触摸屏的 Explore 菜单内通过蓝牙 MIDI 配对。</li></ul>",
+"qa.ps-multi.q":"最多能同时连几台 MIDI 设备？",
+"qa.ps-multi.a":"<p>最多 <strong>3 台 PartyKeys</strong>（NFC / 蓝牙 MIDI），加 <strong>1 台标准 MIDI 设备</strong>（背面有线 MIDI 口），总共 4 路输入。</p><p>多块 PartyKeys 同时连接时，PartyStudio 给每块分配不同颜色，并视为一长条键盘。在任一 PartyKeys 上按多功能键即可接管 PartyStudio 的参数控制权。</p>",
+"qa.ps-touch.q":"触摸屏能做什么？",
+"qa.ps-touch.a":"<p>沿着<strong>屏幕边缘</strong>滑动手指调整总音量（顺时针变大，逆时针变小）。屏幕中央显示当前模式：</p><ul><li><strong>乐器设置</strong> — 音量、音色列表、移调</li><li><strong>鼓机设置</strong> — 音量、BPM、节奏型</li><li><strong>Play & Sing</strong> — 和弦进行、节奏型</li><li><strong>Explore</strong> — 蓝牙配对、设置、探索功能</li></ul>",
+"qa.app-name.q":"App 为什么还叫 \"PopuMusic\" 而不是 \"PartyKeys\"？",
+"qa.app-name.a":"<p>当前的 App 是 PopuMusic——它同时支持 PopuPiano（一代键盘）和新款 PartyKeys 系列。我们正在分批推出新功能，等功能就位后会把 App 重命名为 PartyKeys。</p><p>账号、课程、歌曲、进度会自动迁移，不影响你的使用。</p>",
+"qa.app-feat.q":"App 能做什么？",
+"qa.app-feat.a":"<p>面向 PartyKeys 用户的三大主要功能：</p><ul><li><strong>Game & Course</strong> — 灯光引导式课程，琴键亮起告诉你按哪里。</li><li><strong>Play & Sing</strong> — 跟唱模式，400+ 流行歌曲，PartyKeys 自动亮起和弦键，无需识谱。</li><li><strong>Freeplay</strong> — 38 种音色，最多录 7 轨，自定义键盘灯效，自由创作。</li></ul><p>还有 Pop Hits（瀑布流谱）、AIGC（AI 生成歌曲）、调音器、节拍器、和弦库。</p>",
+"qa.app-free.q":"App 是免费的吗？",
+"qa.app-free.a":"<p>免费——没有内购订阅或付费墙。所有课程和歌曲都开放使用。</p>",
+"qa.app-offline.q":"App 能离线用吗？",
+"qa.app-offline.a":"<p>不能。PopuMusic 需要联网加载课程和歌曲（内容存放在云端）。我们正在评估离线模式作为后续更新的方向。</p>",
+"qa.app-import.q":"能导入自己的歌曲或 MIDI 文件吗？",
+"qa.app-import.a":"<p>App 支持为 Play & Sing 模式输入和弦+歌词数据（暂不支持完整 MIDI 旋律导入）。完整 MIDI 播放推荐用 Synthesia——PartyKeys 作为标准 MIDI 键盘可以兼容它。</p>",
+"qa.app-courses.q":"App 里有多少门课？",
+"qa.app-courses.a":"<p>7 个分章节课程，从第一次按键到完整弹奏歌曲：</p><ol><li>The Basics（基础）</li><li>Finger Skills（手指技巧）</li><li>Chords（和弦）</li><li>Both Hands（双手合作）</li><li>Sing Along（跟唱）</li><li>Piano Solo（独奏）</li><li>Advanced Keyboard（进阶）</li></ol><p>新课程和歌曲会持续更新。有想学的内容？发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。</p>",
+"qa.app-langs.q":"App 支持哪些语言？",
+"qa.app-langs.a":"<p>英语、简体中文、繁体中文、西班牙语、日语、韩语、越南语、土耳其语。其他语言根据需求陆续增加。</p>",
+"qa.app-record.q":"App 能录音或录人声吗？",
+"qa.app-record.a":"<p>Freeplay 可以录最多 7 轨 MIDI（用 App 内置音色播放）。App 不能录人声（没有麦克风输入）。</p><p>想存成音频文件，建议用手机录屏功能——产出的 MP4 自带声音。</p>",
+"qa.nfc-fail.q":"PartyKeys 和 PartyStudio NFC 一碰没反应",
+"qa.nfc-fail.a":"<ul><li>确认 PartyKeys 已开机且有电。</li><li>如果 PartyKeys 已经通过蓝牙连了你的手机，先在手机上断开——一次只能配对一个主机。</li><li>把两个 NFC 区域贴近（少于 2 厘米），保持约 1 秒别动。</li></ul>",
+"qa.pc-fail.q":"PartyKeys 接电脑不工作 / 灯乱闪",
+"qa.pc-fail.a":"<ul><li><strong>USB 3.0 口。</strong>用电脑上 USB 3.0（蓝色）接口，USB 2.0 有时供电不稳。</li><li><strong>MIDI 支持。</strong>确认 DAW 软件已设置接收 PartyKeys 的 MIDI 输入（DAW 设置 → MIDI 输入设备）。</li><li><strong>检查数据线。</strong>有些 USB-C 线只能充电不能传数据。用随机附带的线，或确认能传数据的线。</li></ul>",
+"qa.no-resp.q":"按键没反应",
+"qa.no-resp.a":"<ol><li>用 PartyStudio：检查音响是否开机、触摸屏边缘的总音量是否被调到 0（顺时针滑动调大）。</li><li>用 PopuMusic App：确认 App 内显示 PartyKeys 已连接（蓝牙图标）。</li><li>重启 PartyKeys——长按电源键 3 秒关机，等 5 秒，再长按 3 秒开机。</li><li>如果是某一个键不出声，看下一题。</li></ol>",
+"qa.dead-key.q":"某一个键弹不出声",
+"qa.dead-key.a":"<p>先重启 PartyKeys。如果某个键依然没反应而其他键正常——很可能是硬件故障。</p><p>发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>，附上：</p><ul><li>订单号</li><li>故障键的短视频</li></ul><p>1 个工作日内为你安排免费保内换新。</p>",
+"qa.no-sound-ps.q":"PartyStudio 没声音",
+"qa.no-sound-ps.a":"<ul><li>顺时针沿触摸屏边缘滑动调大音量。</li><li>检查 3.5mm 输出口是否插了东西——如果有，声音会走那条线，不从 PartyStudio 自带喇叭出。</li><li>确认 PartyKeys 已连接（NFC 或蓝牙），且已选好音色。</li></ul>",
+"qa.bt-find.q":"手机蓝牙搜不到 PartyStudio",
+"qa.bt-find.a":"<p>PartyStudio 可能已连别的设备。打开触摸屏的 Explore 菜单，关闭自动连接或手动断开当前设备，再从手机重连。</p>",
+"qa.latency.q":"安卓上有明显延迟",
+"qa.latency.a":"<p>蓝牙 MIDI 延迟因设备和系统优化而异：</p><ul><li>优化好的安卓机：50–80ms（多数人感知不到）</li><li>优化差的安卓机：可达 200ms（明显能感觉到）</li></ul><p>追求最低延迟：用 USB-C 线代替蓝牙——有线延迟约 20ms。或用 PartyStudio（NFC 连接）也是低延迟。</p>",
+"qa.latency-ios.q":"iOS / iPad 上感觉略有延迟",
+"qa.latency-ios.a":"<p>iOS 蓝牙 MIDI 延迟通常很低（约 50ms），多数人感知不到。如果你能感觉到：</p><ul><li>切换到 USB-C 有线连接。</li><li>关掉后台占用蓝牙的其他 App。</li><li>重启 PopuMusic App。</li></ul>",
+"qa.reset.q":"PartyKeys 卡死了怎么强制重置？",
+"qa.reset.a":"<p>长按电源键 <strong>15 秒</strong>强制重置。如果还是没反应，先充电至少 30 分钟（电池可能完全没电——极低电量下即便插着电也不会立刻开机），再试。</p><p>仍未解决？发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。</p>",
+"qa.charge-issue.q":"PartyKeys 充不进电",
+"qa.charge-issue.a":"<ol><li>确认适配器是 5V/2A（或更高 PD），且经过安全认证。低于 5V 充不进。</li><li>换条 USB-C 线试——有些线只能充电不能传数据，规格不达标也可能充不进。</li><li>用其他设备（比如手机）测试适配器是否正常工作。</li><li>若充电指示灯异常，长按电源键 15 秒强制重置。</li></ol>",
+"qa.compat-phones.q":"支持哪些手机和平板？",
+"qa.compat-phones.a":"<ul><li><strong>iOS：</strong>iPhone 12 及以上、iPad 8 及以上，iOS 16+</li><li><strong>Android：</strong>Android 11 及以上（多数 2020 年以后的旗舰机）</li><li><strong>Mac：</strong>M 系列芯片可在 Mac App Store 安装 iPad 版</li></ul><p>需要蓝牙 4.0 BLE。不支持 BLE MIDI 的设备可以用 USB-C 线连。</p>",
+"qa.compat-old.q":"我手机老型号还能用 PartyKeys 吗？",
+"qa.compat-old.a":"<p>能。PartyKeys 是<strong>标准 USB MIDI 键盘</strong>——用 USB-C 数据线接到 Mac 或 Windows 电脑，配合任何 DAW 都能用。官方测试过：</p><ul><li>GarageBand（Mac，免费）</li><li>Logic Pro（Mac）</li><li>Cubase</li><li>FL Studio</li><li>Studio One</li></ul><p>也可以用 NFC 连 PartyStudio，无需 App 直接弹。</p>",
+"qa.compat-win.q":"PopuMusic 有 Windows 版吗？",
+"qa.compat-win.a":"<p>暂时没有。PopuMusic 目前支持 iOS、iPadOS、Android、M 系列 Mac。</p><p>Windows 用户的最佳路径：把 PartyKeys 当作 USB MIDI 控制器接到任何 Windows 上的 DAW。</p>",
+"qa.compat-fire.q":"App 在 Amazon Fire / Pixel / 冷门安卓平板上能用吗？",
+"qa.compat-fire.a":"<p>理论上 Android 11+ 的安卓设备都能用，但我们没测过每个型号。把你设备的具体型号发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>，我们查兼容性清单告诉你。</p>",
+"qa.compat-emu.q":"我能在 PC 装安卓模拟器跑 App 吗？",
+"qa.compat-emu.a":"<p>很遗憾不行。PC 上的安卓模拟器无法正确转发 MIDI 信号，App 无法和 PartyKeys 通讯。请用真实安卓设备、iOS 设备，或 M 系列芯片的 Mac。</p>",
+"qa.warr-cov.q":"保修包含哪些情况？",
+"qa.warr-cov.a":"<p>制造缺陷类，包括：</p><ul><li>说明书列出的功能失效</li><li>键盘无法开机，或无法连接手机 / PartyStudio</li><li>无法重置、重启，或电量充足却无法开机</li><li>其他导致功能失效的硬件缺陷</li></ul>",
+"qa.warr-not.q":"哪些情况不在保修范围？",
+"qa.warr-not.a":"<ul><li>拆机或自行改装的</li><li>意外、疏忽、误用造成的损坏</li><li>正常磨损（表面划痕、琴键变色等）</li><li>非授权渠道购买的</li><li>运输破损（请拒签并联系我们补发）</li><li>极端高温/低温/潮湿/暴晒造成的损坏</li><li>超出 1 年保修期</li></ul>",
+"qa.return-ship.q":"退货运费谁付？",
+"qa.return-ship.a":"<ul><li><strong>保内制造缺陷：</strong>我们承担退货运费并寄出换新。</li><li><strong>无理由退货 / 后悔退货：</strong>买家承担退货运费。</li></ul>",
+"qa.return-addr.q":"退货寄到哪里？",
+"qa.return-addr.a":"<p>请先发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>——退货地址按所在区域而异（美国、欧盟、亚洲）。未经授权直接寄回的包裹可能丢件。</p>",
+"qa.damaged.q":"包裹收到时已破损",
+"qa.damaged.a":"<p><strong>能拒签的话：</strong>请直接拒签，让快递员退回发件方，并联系我们附上照片。</p><p><strong>已经签收：</strong>24 小时内联系我们，附包装+产品的破损照片。我们会处理快递赔付并安排补发。</p><p>请不要在没检查包装的情况下签字 \"完好接收\" ——签了之后再说破损，快递公司可能拒赔。</p>",
+"qa.ship-time.q":"发货要多久？",
+"qa.ship-time.a":"<p class=\"placeholder\">各区域发货时效将在上市前确认——美国 3-7 个工作日，欧盟 5-10 个工作日，其他地区 7-14 个工作日（暂估）。</p>",
+"qa.acc-login.q":"登不进 App",
+"qa.acc-login.a":"<ol><li>用 App 内的 \"忘记密码\" 重置。</li><li>5 分钟内没收到验证邮件，请查垃圾邮件文件夹。</li><li>仍未解决？发邮件到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>，附注册邮箱和账号 ID 截图（在 App 内点头像可看到）。</li></ol><p>24 小时内回复。</p>",
+"qa.acc-prog.q":"重装 App 后课程和进度都没了",
+"qa.acc-prog.a":"<p>进度绑定账号，不绑定设备。用同一邮箱或 Facebook 账号登录，课程、进度、皮肤会自动同步回来。</p><p>登录后还是没看到，请发邮件附账号 ID，我们帮你恢复。</p>",
+"qa.acc-email.q":"怎么改注册邮箱？",
+"qa.acc-email.a":"<p>App 内点头像 → Edit Profile → Change Email，按提示验证即可。</p>",
+"qa.acc-multi.q":"一台 PartyKeys 多个账号能用吗？",
+"qa.acc-multi.a":"<p>可以。PartyKeys 是硬件 MIDI 设备，谁都能配对。每个用户的 App 账号独立保存自己的进度、课程、解锁内容。</p>",
+"qa.gen1-upg.q":"我有 PopuPiano，要升级到 PartyKeys 吗？",
+"qa.gen1-upg.a":"<p>升级两大理由：</p><ol><li><strong>整套出声不依赖 App。</strong>PartyKeys + PartyStudio 直接给你 70W 高保真音响、128 种音色、35+ 种鼓机节奏——不用 App、不用电脑就能弹。NFC 一碰就上手。</li><li><strong>更干净的硬件设计。</strong>单板 36 键 + 磁吸拼接（最多 3 块），取代了 29 键 + ChordPad + 扩展键的拼装。ChordPad 的和弦快捷功能现在融进了 Play & Sing 模式和多功能键。</li></ol><p><strong>继续用 PopuPiano 的理由。</strong>如果你喜欢 ChordPad 的硅胶和弦条手感，或者你的工作流离不开 PopuSound 的 10 种音色——PopuPiano 仍然好用。PopuMusic App 同时支持两款产品。</p>",
+"qa.gen1-app.q":"PopuMusic App 能用 PartyKeys 吗？",
+"qa.gen1-app.a":"<p>能——同一个 PopuMusic App 同时支持 PopuPiano 和 PartyKeys。在 App 主页 \"Select Instrument\" 里切换。</p><p>账号、课程、进度跨两款键盘共享。</p>",
+"qa.gen1-ps.q":"我的 PopuSound 音响能配 PartyKeys 吗？",
+"qa.gen1-ps.a":"<p>不能。PopuSound 是为 PopuPiano 设计的，自带专用协议和 10 种音色。PartyKeys 通过 NFC + USB MIDI 和 PartyStudio 通讯，PartyStudio 内含 128 种音色和不同的发声引擎。两套系统不互通。</p>",
+"qa.gen1-sup.q":"我有 PopuPiano 的问题，找谁？",
+"qa.gen1-sup.a":"<p>PopuPiano 的旧售后邮箱 <a href=\"mailto:support@popumusic.com\">support@popumusic.com</a> 仍然有效。我们正在把所有客户支持统一到 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>——两个邮箱发到同一个团队，怎么发都能收到。</p>"
+},
+"zh-TW": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保固",
+"hero.eyebrow":"PartyKeys 客戶支援","hero.title":"有什麼可以幫你？","hero.subtitle":"關於 PartyKeys、PartyStudio、PopuMusic App、連線與保固的快速解答。",
+"search.placeholder":"搜尋問題",
+"chip.bluetooth":"藍牙","chip.charging":"充電","chip.return":"退貨","chip.compat":"機型相容","chip.drum":"鼓機",
+"qc.start":"快速上手","qc.keys":"PartyKeys 鍵盤","qc.studio":"PartyStudio 喇叭","qc.app":"PopuMusic App","qc.trouble":"故障排除","qc.warranty":"保固與退貨","qc.account":"帳號","qc.gen1":"PopuPiano 老用戶",
+"popular.title":"熱門問題","popular.badge":"TOP 10",
+"sec.start.title":"快速上手","sec.start.desc":"開箱、開機、60 秒內讓 PartyKeys 出聲。",
+"sec.keys.title":"PartyKeys 鍵盤","sec.keys.desc":"硬體規格、多功能鍵、燈效、充電、多塊拼接。",
+"sec.studio.title":"PartyStudio 喇叭","sec.studio.desc":"70W Hi-Fi 喇叭，128 種音色，35+ 鼓機節奏。",
+"sec.app.title":"PopuMusic App","sec.app.desc":"課程、跟唱、創作工具——以及 App 與 PartyKeys 的關係。",
+"sec.trouble.title":"故障排除","sec.trouble.desc":"卡關了？從這裡開始。",
+"sec.compat.title":"裝置相容性","sec.compat.desc":"你的手機、平板或電腦是否支援 PartyKeys。",
+"sec.warr.title":"保固與退貨","sec.warr.desc":"1 年保固、7 天無理由退貨、如何申請售後。",
+"sec.acc.title":"帳號與登入","sec.acc.desc":"密碼、Email、帳號回復。",
+"sec.gen1.title":"給 PopuPiano 老用戶","sec.gen1.desc":"兩者差異點與遷移說明。",
+"cta.notfound":"沒找到你要的？","cta.email":"寫 Email 給我們",
+"noresults.text":"沒有找到結果。<br/>換個關鍵字，或寫信至 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
+"footer.title":"還需要協助？","footer.desc":"把訂單號發給我們，24 小時內回覆。","footer.btn":"寫 Email",
+"footer.legal":"© PartyKeys，由 PopuMusic 出品。最後更新 <span id=\"last-updated\">2026</span>。意見回饋：<a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
+"fb.helpful":"這個回答有幫助嗎？","fb.thanks":"感謝你的回饋。",
+"banner.autotrans":"機器輔助翻譯，歡迎指正：support@partykeys.com",
+"search.hint":"按","search.hint2":"向 AI 提問 · 輸入即時過濾",
+"ask.sources":"參考來源","ask.related":"相關問題","ask.helpful":"這個回答有幫助嗎？","ask.thanks":"感謝回饋。","ask.close":"關閉","ask.thinking":"思考中…",
+"qa.bt-fail.q":"PartyKeys 藍牙連不上",
+"qa.battery.q":"電池能用多久？怎麼充電？",
+"qa.app-devices.q":"App 支援哪些裝置？",
+"qa.box.q":"包裝盒裡有什麼？",
+"qa.ps-connect.q":"PartyKeys 怎麼連 PartyStudio？",
+"qa.app-daw.q":"我能用自己的 DAW 嗎？",
+"qa.key-feel.q":"琴鍵有力度感應或配重嗎？",
+"qa.warr-period.q":"保固期是多久？",
+"qa.return-policy.q":"可以退貨退款嗎？",
+"qa.first-sound.q":"PartyKeys 第一次怎麼出聲？"
+},
+"es": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantía",
+"hero.eyebrow":"Soporte de PartyKeys","hero.title":"¿Cómo podemos ayudarte?","hero.subtitle":"Respuestas rápidas sobre tu PartyKeys, PartyStudio, la app PopuMusic, configuración y garantía.",
+"search.placeholder":"Buscar ayuda",
+"chip.bluetooth":"Bluetooth","chip.charging":"Carga","chip.return":"Devoluciones","chip.compat":"Compatibilidad","chip.drum":"Caja de ritmos",
+"qc.start":"Inicio rápido","qc.keys":"Teclado PartyKeys","qc.studio":"Altavoz PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Solución de problemas","qc.warranty":"Garantía y devoluciones","qc.account":"Cuenta","qc.gen1":"Usuarios de PopuPiano",
+"popular.title":"Más consultadas","popular.badge":"TOP 10",
+"sec.start.title":"Inicio rápido","sec.start.desc":"Configuración inicial, contenido de la caja y cómo obtener sonido en menos de 60 segundos.",
+"sec.keys.title":"Teclado PartyKeys","sec.keys.desc":"Especificaciones, botón multifunción, iluminación, carga y conexión de varios teclados.",
+"sec.studio.title":"Altavoz PartyStudio","sec.studio.desc":"Altavoz de 70W con 128 instrumentos y 35+ ritmos de batería.",
+"sec.app.title":"App PopuMusic","sec.app.desc":"Lecciones, canciones para cantar y herramientas de creación.",
+"sec.trouble.title":"Solución de problemas","sec.trouble.desc":"¿Algo no funciona? Empieza aquí.",
+"sec.compat.title":"Compatibilidad de dispositivos","sec.compat.desc":"Si tu teléfono, tablet u ordenador funcionan con PartyKeys.",
+"sec.warr.title":"Garantía y devoluciones","sec.warr.desc":"1 año de garantía, 7 días para devolución sin motivo.",
+"sec.acc.title":"Cuenta e inicio de sesión","sec.acc.desc":"Contraseñas, correos y recuperación de cuenta.",
+"sec.gen1.title":"Para usuarios de PopuPiano","sec.gen1.desc":"En qué se diferencia PartyKeys y qué se conserva.",
+"cta.notfound":"¿No encuentras lo que buscas?","cta.email":"Contactar soporte",
+"noresults.text":"Sin resultados.<br/>Prueba otra búsqueda o escríbenos a <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"footer.title":"¿Necesitas más ayuda?","footer.desc":"Envíanos tu número de pedido y responderemos en 24 horas.","footer.btn":"Enviar correo",
+"footer.legal":"© PartyKeys, por PopuMusic. Última actualización <span id=\"last-updated\">2026</span>. Comentarios: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"¿Te resultó útil?","fb.thanks":"Gracias por tus comentarios.",
+"banner.autotrans":"Traducción automática asistida. Correcciones bienvenidas en support@partykeys.com.",
+"search.hint":"Pulsa","search.hint2":"para preguntar a la IA · escribe para filtrar",
+"ask.sources":"Fuentes","ask.related":"Preguntas relacionadas","ask.helpful":"¿Te ha sido útil?","ask.thanks":"Gracias por tus comentarios.","ask.close":"Cerrar","ask.thinking":"Pensando…",
+"qa.bt-fail.q":"PartyKeys no conecta por Bluetooth",
+"qa.battery.q":"¿Cuánto dura la batería y cómo se carga?",
+"qa.app-devices.q":"¿Qué dispositivos admite la app?",
+"qa.box.q":"¿Qué incluye la caja?",
+"qa.ps-connect.q":"¿Cómo conecto PartyKeys a PartyStudio?",
+"qa.app-daw.q":"¿Puedo usar mi propio DAW?",
+"qa.key-feel.q":"¿Las teclas son sensibles a la velocidad o contrapesadas?",
+"qa.warr-period.q":"¿Cuál es el período de garantía?",
+"qa.return-policy.q":"¿Puedo devolverlo y obtener reembolso?",
+"qa.first-sound.q":"¿Cómo obtengo el primer sonido?"
+},
+"fr": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantie",
+"hero.eyebrow":"Assistance PartyKeys","hero.title":"Comment pouvons-nous vous aider ?","hero.subtitle":"Réponses rapides sur PartyKeys, PartyStudio, l'application PopuMusic, l'installation et la garantie.",
+"search.placeholder":"Rechercher",
+"chip.bluetooth":"Bluetooth","chip.charging":"Charge","chip.return":"Retours","chip.compat":"Compatibilité","chip.drum":"Boîte à rythmes",
+"qc.start":"Démarrage rapide","qc.keys":"Clavier PartyKeys","qc.studio":"Enceinte PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Dépannage","qc.warranty":"Garantie et retours","qc.account":"Compte","qc.gen1":"Utilisateurs PopuPiano",
+"popular.title":"Questions fréquentes","popular.badge":"TOP 10",
+"sec.start.title":"Démarrage rapide","sec.start.desc":"Configuration, contenu de la boîte et premier son en moins de 60 secondes.",
+"sec.keys.title":"Clavier PartyKeys","sec.keys.desc":"Spécifications, bouton multifonction, éclairage, charge, connexion de plusieurs claviers.",
+"sec.studio.title":"Enceinte PartyStudio","sec.studio.desc":"Enceinte 70W Hi-Fi, 128 instruments, 35+ rythmes de batterie.",
+"sec.app.title":"App PopuMusic","sec.app.desc":"Cours, karaoké, création musicale.",
+"sec.trouble.title":"Dépannage","sec.trouble.desc":"Quelque chose ne marche pas ? Commencez ici.",
+"sec.compat.title":"Compatibilité","sec.compat.desc":"Vérifiez si votre appareil fonctionne avec PartyKeys.",
+"sec.warr.title":"Garantie et retours","sec.warr.desc":"Garantie 1 an, retours sans raison sous 7 jours.",
+"sec.acc.title":"Compte et connexion","sec.acc.desc":"Mots de passe, e-mails, récupération de compte.",
+"sec.gen1.title":"Pour les utilisateurs PopuPiano","sec.gen1.desc":"Différences avec PartyKeys et ce qui est compatible.",
+"cta.notfound":"Vous ne trouvez pas ?","cta.email":"Contacter le support",
+"noresults.text":"Aucun résultat.<br/>Essayez une autre recherche ou écrivez-nous à <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"footer.title":"Besoin d'aide ?","footer.desc":"Envoyez-nous votre numéro de commande, réponse sous 24 heures.","footer.btn":"Envoyer un e-mail",
+"footer.legal":"© PartyKeys, par PopuMusic. Dernière mise à jour <span id=\"last-updated\">2026</span>. Commentaires : <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"Cette réponse vous a-t-elle aidé ?","fb.thanks":"Merci pour votre retour.",
+"banner.autotrans":"Traduction assistée par IA. Corrections bienvenues à support@partykeys.com.",
+"search.hint":"Appuyez sur","search.hint2":"pour demander à l'IA · saisissez pour filtrer",
+"ask.sources":"Sources","ask.related":"Questions associées","ask.helpful":"Cette réponse vous a-t-elle aidé ?","ask.thanks":"Merci pour votre retour.","ask.close":"Fermer","ask.thinking":"Réflexion…",
+"qa.bt-fail.q":"PartyKeys ne se connecte pas en Bluetooth",
+"qa.battery.q":"Quelle est l'autonomie et comment charger ?",
+"qa.app-devices.q":"Quels appareils l'app prend-elle en charge ?",
+"qa.box.q":"Que contient la boîte ?",
+"qa.ps-connect.q":"Comment connecter PartyKeys à PartyStudio ?",
+"qa.app-daw.q":"Puis-je utiliser mon propre DAW ?",
+"qa.key-feel.q":"Les touches sont-elles sensibles à la vélocité ?",
+"qa.warr-period.q":"Quelle est la durée de la garantie ?",
+"qa.return-policy.q":"Puis-je obtenir un remboursement ?",
+"qa.first-sound.q":"Comment obtenir le premier son ?"
+},
+"de": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantie",
+"hero.eyebrow":"PartyKeys Support","hero.title":"Wie können wir helfen?","hero.subtitle":"Schnelle Antworten zu PartyKeys, PartyStudio, der PopuMusic-App, Einrichtung und Garantie.",
+"search.placeholder":"Hilfe durchsuchen",
+"chip.bluetooth":"Bluetooth","chip.charging":"Aufladen","chip.return":"Rücksendung","chip.compat":"Kompatibilität","chip.drum":"Drum-Machine",
+"qc.start":"Schnellstart","qc.keys":"PartyKeys Keyboard","qc.studio":"PartyStudio Lautsprecher","qc.app":"PopuMusic App","qc.trouble":"Fehlerbehebung","qc.warranty":"Garantie und Rückgabe","qc.account":"Konto","qc.gen1":"PopuPiano-Besitzer",
+"popular.title":"Häufig gefragt","popular.badge":"TOP 10",
+"sec.start.title":"Schnellstart","sec.start.desc":"Erste Einrichtung, Lieferumfang und erster Klang in unter 60 Sekunden.",
+"sec.keys.title":"PartyKeys Keyboard","sec.keys.desc":"Hardware-Specs, Multifunktionstaste, Beleuchtung, Aufladen, mehrere Keyboards verbinden.",
+"sec.studio.title":"PartyStudio Lautsprecher","sec.studio.desc":"70W Hi-Fi-Lautsprecher mit 128 Instrumenten und 35+ Drum-Patterns.",
+"sec.app.title":"PopuMusic App","sec.app.desc":"Lektionen, Mitsing-Modus, Musikkreation.",
+"sec.trouble.title":"Fehlerbehebung","sec.trouble.desc":"Wenn etwas nicht funktioniert — fang hier an.",
+"sec.compat.title":"Geräte-Kompatibilität","sec.compat.desc":"Ob dein Telefon, Tablet oder Computer mit PartyKeys funktioniert.",
+"sec.warr.title":"Garantie und Rückgabe","sec.warr.desc":"1 Jahr Garantie, 7 Tage Rückgabe ohne Angabe von Gründen.",
+"sec.acc.title":"Konto und Anmeldung","sec.acc.desc":"Passwörter, E-Mail-Änderung, Konto-Wiederherstellung.",
+"sec.gen1.title":"Für PopuPiano-Besitzer","sec.gen1.desc":"Wie sich PartyKeys unterscheidet und was übernommen wird.",
+"cta.notfound":"Nicht gefunden, was du suchst?","cta.email":"Support kontaktieren",
+"noresults.text":"Keine Ergebnisse.<br/>Versuche eine andere Suche oder schreibe uns an <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"footer.title":"Brauchst du Hilfe?","footer.desc":"Schick uns deine Bestellnummer — wir antworten innerhalb von 24 Stunden.","footer.btn":"E-Mail senden",
+"footer.legal":"© PartyKeys, von PopuMusic. Zuletzt aktualisiert <span id=\"last-updated\">2026</span>. Feedback: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"War das hilfreich?","fb.thanks":"Danke für dein Feedback.",
+"banner.autotrans":"Maschinenunterstützte Übersetzung. Korrekturen willkommen unter support@partykeys.com.",
+"search.hint":"Drücke","search.hint2":"um die KI zu fragen · tippen zum Filtern",
+"ask.sources":"Quellen","ask.related":"Verwandte Fragen","ask.helpful":"War das hilfreich?","ask.thanks":"Danke für dein Feedback.","ask.close":"Schließen","ask.thinking":"Denke nach…",
+"qa.bt-fail.q":"PartyKeys verbindet sich nicht via Bluetooth",
+"qa.battery.q":"Wie lange hält der Akku und wie lade ich ihn?",
+"qa.app-devices.q":"Welche Geräte unterstützt die App?",
+"qa.box.q":"Was ist im Lieferumfang enthalten?",
+"qa.ps-connect.q":"Wie verbinde ich PartyKeys mit PartyStudio?",
+"qa.app-daw.q":"Kann ich meine eigene DAW nutzen?",
+"qa.key-feel.q":"Sind die Tasten anschlagsdynamisch oder gewichtet?",
+"qa.warr-period.q":"Wie lang ist die Garantie?",
+"qa.return-policy.q":"Kann ich zurückgeben und Geld zurückbekommen?",
+"qa.first-sound.q":"Wie bekomme ich den ersten Ton?"
+},
+"ja": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"保証",
+"hero.eyebrow":"PartyKeys サポート","hero.title":"何かお手伝いできることはありますか？","hero.subtitle":"PartyKeys、PartyStudio、PopuMusic アプリ、セットアップ、保証についての解答。",
+"search.placeholder":"ヘルプを検索",
+"chip.bluetooth":"Bluetooth","chip.charging":"充電","chip.return":"返品","chip.compat":"対応機種","chip.drum":"ドラムマシン",
+"qc.start":"クイックスタート","qc.keys":"PartyKeys キーボード","qc.studio":"PartyStudio スピーカー","qc.app":"PopuMusic アプリ","qc.trouble":"トラブルシューティング","qc.warranty":"保証と返品","qc.account":"アカウント","qc.gen1":"PopuPiano ユーザー向け",
+"popular.title":"よくある質問","popular.badge":"TOP 10",
+"sec.start.title":"クイックスタート","sec.start.desc":"開封、電源、60 秒以内に音を出す方法。",
+"sec.keys.title":"PartyKeys キーボード","sec.keys.desc":"ハードウェア仕様、マルチファンクションボタン、ライティング、充電、複数台連結。",
+"sec.studio.title":"PartyStudio スピーカー","sec.studio.desc":"70W Hi-Fi スピーカー、128 種の音色、35+ のドラムパターン。",
+"sec.app.title":"PopuMusic アプリ","sec.app.desc":"レッスン、弾き語り、音楽制作ツール。",
+"sec.trouble.title":"トラブルシューティング","sec.trouble.desc":"うまくいかない時はここから。",
+"sec.compat.title":"対応デバイス","sec.compat.desc":"お使いのスマホ・タブレット・PC が PartyKeys に対応しているか。",
+"sec.warr.title":"保証と返品","sec.warr.desc":"1 年保証、7 日以内なら理由不問で返品可。",
+"sec.acc.title":"アカウントとログイン","sec.acc.desc":"パスワード、メールアドレス、アカウント復旧。",
+"sec.gen1.title":"PopuPiano ユーザーへ","sec.gen1.desc":"PartyKeys との違いと、引き継ぎについて。",
+"cta.notfound":"お探しの答えが見つかりませんでしたか？","cta.email":"サポートに問い合わせる",
+"noresults.text":"結果が見つかりませんでした。<br/>別のキーワードでお試しいただくか、<a href=\"mailto:support@partykeys.com\">support@partykeys.com</a> までメールでお問い合わせください。",
+"footer.title":"まだお困りですか？","footer.desc":"注文番号をお送りいただければ 24 時間以内にご返信します。","footer.btn":"メールを送る",
+"footer.legal":"© PartyKeys、PopuMusic 製。最終更新 <span id=\"last-updated\">2026</span>。フィードバック：<a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>。",
+"fb.helpful":"この回答は役に立ちましたか？","fb.thanks":"フィードバックありがとうございます。",
+"banner.autotrans":"機械支援による翻訳です。修正提案歓迎：support@partykeys.com",
+"search.hint":"","search.hint2":"を押して AI に質問 · 入力で絞り込み",
+"ask.sources":"参考元","ask.related":"関連する質問","ask.helpful":"この回答は役に立ちましたか？","ask.thanks":"フィードバックありがとうございます。","ask.close":"閉じる","ask.thinking":"考え中…",
+"qa.bt-fail.q":"PartyKeys が Bluetooth に接続できない",
+"qa.battery.q":"バッテリーの持続時間と充電方法は？",
+"qa.app-devices.q":"アプリは何の端末に対応していますか？",
+"qa.box.q":"箱の中身は何ですか？",
+"qa.ps-connect.q":"PartyKeys と PartyStudio はどう接続しますか？",
+"qa.app-daw.q":"自分の DAW を使えますか？",
+"qa.key-feel.q":"鍵盤はベロシティ対応／ウェイト付きですか？",
+"qa.warr-period.q":"保証期間はどのくらいですか？",
+"qa.return-policy.q":"返品して返金してもらえますか？",
+"qa.first-sound.q":"最初の音はどう出しますか？"
+},
+"ko": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"앱","nav.warranty":"보증",
+"hero.eyebrow":"PartyKeys 고객 지원","hero.title":"무엇을 도와드릴까요?","hero.subtitle":"PartyKeys, PartyStudio, PopuMusic 앱, 설정, 보증에 관한 빠른 답변.",
+"search.placeholder":"도움말 검색",
+"chip.bluetooth":"블루투스","chip.charging":"충전","chip.return":"반품","chip.compat":"호환 기기","chip.drum":"드럼 머신",
+"qc.start":"빠른 시작","qc.keys":"PartyKeys 키보드","qc.studio":"PartyStudio 스피커","qc.app":"PopuMusic 앱","qc.trouble":"문제 해결","qc.warranty":"보증 및 반품","qc.account":"계정","qc.gen1":"PopuPiano 사용자",
+"popular.title":"많이 묻는 질문","popular.badge":"TOP 10",
+"sec.start.title":"빠른 시작","sec.start.desc":"개봉, 전원, 60 초 안에 소리 내기.",
+"sec.keys.title":"PartyKeys 키보드","sec.keys.desc":"하드웨어 사양, 멀티 기능 버튼, 조명, 충전, 다중 키보드 연결.",
+"sec.studio.title":"PartyStudio 스피커","sec.studio.desc":"70W Hi-Fi 스피커, 128 종 음색, 35+ 드럼 패턴.",
+"sec.app.title":"PopuMusic 앱","sec.app.desc":"레슨, 따라 부르기, 음악 만들기.",
+"sec.trouble.title":"문제 해결","sec.trouble.desc":"문제가 생겼다면 여기서 시작하세요.",
+"sec.compat.title":"기기 호환성","sec.compat.desc":"내 휴대폰, 태블릿, 컴퓨터가 PartyKeys 와 호환되는지 확인.",
+"sec.warr.title":"보증 및 반품","sec.warr.desc":"1 년 보증, 7 일 무사유 반품.",
+"sec.acc.title":"계정 및 로그인","sec.acc.desc":"비밀번호, 이메일, 계정 복구.",
+"sec.gen1.title":"PopuPiano 사용자께","sec.gen1.desc":"PartyKeys 와의 차이와 이어지는 점.",
+"cta.notfound":"찾는 답이 없으신가요?","cta.email":"고객지원에 문의하기",
+"noresults.text":"결과가 없습니다.<br/>다른 키워드로 검색하시거나 <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a> 으로 이메일을 보내주세요.",
+"footer.title":"도움이 더 필요하신가요?","footer.desc":"주문 번호를 보내주시면 24 시간 내 답변드립니다.","footer.btn":"이메일 보내기",
+"footer.legal":"© PartyKeys, PopuMusic 제작. 최근 업데이트 <span id=\"last-updated\">2026</span>. 피드백: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"이 답변이 도움이 되었나요?","fb.thanks":"피드백 감사합니다.",
+"banner.autotrans":"기계 보조 번역입니다. 정정 환영: support@partykeys.com",
+"search.hint":"","search.hint2":"를 눌러 AI 에 질문 · 입력하면 즉시 필터링",
+"ask.sources":"참고 항목","ask.related":"관련 질문","ask.helpful":"이 답변이 도움이 되었나요?","ask.thanks":"피드백 감사합니다.","ask.close":"닫기","ask.thinking":"생각 중…",
+"qa.bt-fail.q":"PartyKeys 가 블루투스로 연결되지 않습니다",
+"qa.battery.q":"배터리 지속 시간과 충전 방법은?",
+"qa.app-devices.q":"앱이 지원하는 기기는?",
+"qa.box.q":"박스 안에 무엇이 들어있나요?",
+"qa.ps-connect.q":"PartyKeys 를 PartyStudio 에 어떻게 연결하나요?",
+"qa.app-daw.q":"제 DAW 를 사용할 수 있나요?",
+"qa.key-feel.q":"건반에 벨로시티 / 웨이트가 있나요?",
+"qa.warr-period.q":"보증 기간은 얼마나 되나요?",
+"qa.return-policy.q":"환불 받을 수 있나요?",
+"qa.first-sound.q":"처음에 어떻게 소리를 내나요?"
+},
+"pt": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Garantia",
+"hero.eyebrow":"Suporte PartyKeys","hero.title":"Como podemos ajudar?","hero.subtitle":"Respostas rápidas sobre PartyKeys, PartyStudio, app PopuMusic, configuração e garantia.",
+"search.placeholder":"Buscar ajuda",
+"chip.bluetooth":"Bluetooth","chip.charging":"Carregamento","chip.return":"Devoluções","chip.compat":"Compatibilidade","chip.drum":"Bateria eletrônica",
+"qc.start":"Início rápido","qc.keys":"Teclado PartyKeys","qc.studio":"Caixa PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Solução de problemas","qc.warranty":"Garantia e devoluções","qc.account":"Conta","qc.gen1":"Usuários do PopuPiano",
+"popular.title":"Mais perguntadas","popular.badge":"TOP 10",
+"sec.start.title":"Início rápido","sec.start.desc":"Configuração inicial, conteúdo da caixa e primeiro som em menos de 60 segundos.",
+"sec.keys.title":"Teclado PartyKeys","sec.keys.desc":"Especificações, botão multifunção, iluminação, carregamento e conexão de múltiplos teclados.",
+"sec.studio.title":"Caixa PartyStudio","sec.studio.desc":"Caixa Hi-Fi de 70W com 128 instrumentos e 35+ ritmos.",
+"sec.app.title":"App PopuMusic","sec.app.desc":"Lições, karaokê e criação musical.",
+"sec.trouble.title":"Solução de problemas","sec.trouble.desc":"Algo não funcionou? Comece por aqui.",
+"sec.compat.title":"Compatibilidade","sec.compat.desc":"Se seu telefone, tablet ou computador funciona com PartyKeys.",
+"sec.warr.title":"Garantia e devoluções","sec.warr.desc":"1 ano de garantia, 7 dias para devolução sem motivo.",
+"sec.acc.title":"Conta e login","sec.acc.desc":"Senhas, e-mails, recuperação de conta.",
+"sec.gen1.title":"Para usuários do PopuPiano","sec.gen1.desc":"Diferenças e o que se mantém no PartyKeys.",
+"cta.notfound":"Não encontrou o que procurava?","cta.email":"Falar com suporte",
+"noresults.text":"Sem resultados.<br/>Tente outra busca ou escreva para <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"footer.title":"Precisa de mais ajuda?","footer.desc":"Envie seu número de pedido — respondemos em 24 horas.","footer.btn":"Enviar e-mail",
+"footer.legal":"© PartyKeys, por PopuMusic. Última atualização <span id=\"last-updated\">2026</span>. Feedback: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"Esta resposta foi útil?","fb.thanks":"Obrigado pelo feedback.",
+"banner.autotrans":"Tradução assistida por IA. Correções bem-vindas em support@partykeys.com.",
+"search.hint":"Pressione","search.hint2":"para perguntar à IA · digite para filtrar",
+"ask.sources":"Fontes","ask.related":"Perguntas relacionadas","ask.helpful":"Esta resposta foi útil?","ask.thanks":"Obrigado pelo feedback.","ask.close":"Fechar","ask.thinking":"Pensando…",
+"qa.bt-fail.q":"PartyKeys não conecta por Bluetooth",
+"qa.battery.q":"Quanto dura a bateria e como carregar?",
+"qa.app-devices.q":"Quais dispositivos o app suporta?",
+"qa.box.q":"O que vem na caixa?",
+"qa.ps-connect.q":"Como conecto o PartyKeys ao PartyStudio?",
+"qa.app-daw.q":"Posso usar minha própria DAW?",
+"qa.key-feel.q":"As teclas têm sensibilidade ou peso?",
+"qa.warr-period.q":"Qual é o período de garantia?",
+"qa.return-policy.q":"Posso devolver e receber reembolso?",
+"qa.first-sound.q":"Como obtenho o primeiro som?"
+},
+"vi": {
+"nav.keys":"PartyKeys","nav.studio":"PartyStudio","nav.app":"App","nav.warranty":"Bảo hành",
+"hero.eyebrow":"Hỗ trợ PartyKeys","hero.title":"Chúng tôi có thể giúp gì?","hero.subtitle":"Câu trả lời nhanh về PartyKeys, PartyStudio, ứng dụng PopuMusic, cài đặt và bảo hành.",
+"search.placeholder":"Tìm trợ giúp",
+"chip.bluetooth":"Bluetooth","chip.charging":"Sạc pin","chip.return":"Trả hàng","chip.compat":"Tương thích","chip.drum":"Trống điện tử",
+"qc.start":"Bắt đầu nhanh","qc.keys":"Bàn phím PartyKeys","qc.studio":"Loa PartyStudio","qc.app":"App PopuMusic","qc.trouble":"Khắc phục sự cố","qc.warranty":"Bảo hành và trả hàng","qc.account":"Tài khoản","qc.gen1":"Người dùng PopuPiano",
+"popular.title":"Câu hỏi phổ biến","popular.badge":"TOP 10",
+"sec.start.title":"Bắt đầu nhanh","sec.start.desc":"Khui hộp, bật nguồn và phát ra âm thanh trong dưới 60 giây.",
+"sec.keys.title":"Bàn phím PartyKeys","sec.keys.desc":"Thông số phần cứng, nút đa năng, đèn LED, sạc, ghép nhiều bàn phím.",
+"sec.studio.title":"Loa PartyStudio","sec.studio.desc":"Loa Hi-Fi 70W với 128 nhạc cụ và hơn 35 mẫu trống.",
+"sec.app.title":"App PopuMusic","sec.app.desc":"Bài học, hát theo, sáng tạo âm nhạc.",
+"sec.trouble.title":"Khắc phục sự cố","sec.trouble.desc":"Có gì đó không hoạt động? Bắt đầu từ đây.",
+"sec.compat.title":"Tương thích thiết bị","sec.compat.desc":"Điện thoại, máy tính bảng hay máy tính của bạn có dùng được PartyKeys không.",
+"sec.warr.title":"Bảo hành và trả hàng","sec.warr.desc":"Bảo hành 1 năm, đổi trả 7 ngày không lý do.",
+"sec.acc.title":"Tài khoản và đăng nhập","sec.acc.desc":"Mật khẩu, email và khôi phục tài khoản.",
+"sec.gen1.title":"Cho người dùng PopuPiano","sec.gen1.desc":"PartyKeys khác gì và những gì được kế thừa.",
+"cta.notfound":"Không tìm thấy câu trả lời?","cta.email":"Liên hệ hỗ trợ",
+"noresults.text":"Không có kết quả.<br/>Thử từ khoá khác, hoặc gửi email tới <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"footer.title":"Cần trợ giúp thêm?","footer.desc":"Gửi cho chúng tôi mã đơn hàng — phản hồi trong 24 giờ.","footer.btn":"Gửi email",
+"footer.legal":"© PartyKeys, do PopuMusic phát triển. Cập nhật lần cuối <span id=\"last-updated\">2026</span>. Phản hồi: <a href=\"mailto:support@partykeys.com\">support@partykeys.com</a>.",
+"fb.helpful":"Câu trả lời này có hữu ích không?","fb.thanks":"Cảm ơn bạn đã phản hồi.",
+"banner.autotrans":"Bản dịch hỗ trợ bởi máy. Góp ý gửi về support@partykeys.com.",
+"search.hint":"Nhấn","search.hint2":"để hỏi AI · gõ để lọc",
+"ask.sources":"Nguồn","ask.related":"Câu hỏi liên quan","ask.helpful":"Câu trả lời này có hữu ích không?","ask.thanks":"Cảm ơn phản hồi.","ask.close":"Đóng","ask.thinking":"Đang suy nghĩ…",
+"qa.bt-fail.q":"PartyKeys không kết nối Bluetooth được",
+"qa.battery.q":"Pin dùng được bao lâu và sạc thế nào?",
+"qa.app-devices.q":"App hỗ trợ những thiết bị nào?",
+"qa.box.q":"Trong hộp có gì?",
+"qa.ps-connect.q":"Làm sao kết nối PartyKeys với PartyStudio?",
+"qa.app-daw.q":"Tôi dùng được DAW của mình không?",
+"qa.key-feel.q":"Phím có cảm ứng lực và trọng lượng không?",
+"qa.warr-period.q":"Thời hạn bảo hành là bao lâu?",
+"qa.return-policy.q":"Tôi có thể trả hàng để được hoàn tiền không?",
+"qa.first-sound.q":"Làm sao có âm thanh lần đầu?"
+}
+};
+
+(function () {
+  var input = document.getElementById('search');
+  var sections = document.querySelectorAll('.section');
+  var noResults = document.getElementById('no-results');
+
+  function clearMarks(el) {
+    var marks = el.querySelectorAll('mark');
+    marks.forEach(function (m) {
+      var p = m.parentNode;
+      p.replaceChild(document.createTextNode(m.textContent), m);
+      p.normalize();
+    });
+  }
+  function highlightInNode(node, term) {
+    if (node.nodeType === 3) {
+      var lower = node.data.toLowerCase();
+      var idx = lower.indexOf(term);
+      if (idx >= 0) {
+        var before = node.data.slice(0, idx);
+        var match = node.data.slice(idx, idx + term.length);
+        var after = node.data.slice(idx + term.length);
+        var frag = document.createDocumentFragment();
+        if (before) frag.appendChild(document.createTextNode(before));
+        var m = document.createElement('mark');
+        m.textContent = match;
+        frag.appendChild(m);
+        if (after) {
+          var afterNode = document.createTextNode(after);
+          frag.appendChild(afterNode);
+          node.parentNode.replaceChild(frag, node);
+          highlightInNode(afterNode, term);
+          return;
+        }
+        node.parentNode.replaceChild(frag, node);
+      }
+    } else if (node.nodeType === 1 && !['MARK','SCRIPT','STYLE','svg','SVG'].includes(node.tagName)) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (c) { highlightInNode(c, term); });
+    }
+  }
+  function filter() {
+    var q = input.value.trim().toLowerCase();
+    var anyMatch = false;
+    var allQas = document.querySelectorAll('details.qa');
+    allQas.forEach(function (qa) { clearMarks(qa); });
+    if (!q) {
+      allQas.forEach(function (qa) { qa.style.display = ''; qa.removeAttribute('open'); });
+      sections.forEach(function (s) { s.style.display = ''; });
+      noResults.style.display = 'none';
+      return;
+    }
+    sections.forEach(function (section) {
+      var qas = section.querySelectorAll('details.qa');
+      var has = false;
+      qas.forEach(function (qa) {
+        var text = qa.textContent.toLowerCase();
+        if (text.indexOf(q) >= 0) {
+          qa.style.display = ''; qa.setAttribute('open', '');
+          highlightInNode(qa, q);
+          has = true; anyMatch = true;
+        } else {
+          qa.style.display = 'none'; qa.removeAttribute('open');
+        }
+      });
+      section.style.display = has ? '' : 'none';
+    });
+    noResults.style.display = anyMatch ? 'none' : 'block';
+  }
+  input.addEventListener('input', filter);
+
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      input.value = c.dataset.q; input.focus(); filter();
+      window.scrollTo({ top: input.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.section').forEach(function (s) { io.observe(s); });
+  } else {
+    document.querySelectorAll('.section').forEach(function (s) { s.classList.add('visible'); });
+  }
+
+  function injectFeedback() {
+    document.querySelectorAll('details.qa .answer').forEach(function (ans) {
+      if (ans.querySelector('.feedback')) return;
+      var fb = document.createElement('div');
+      fb.className = 'feedback';
+      fb.innerHTML = '<span data-i18n="fb.helpful">Was this helpful?</span><div class="feedback-buttons"><button class="fb-btn" data-val="up" aria-label="Yes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button><button class="fb-btn" data-val="down" aria-label="No"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg></button></div><span class="fb-thanks" data-i18n="fb.thanks">Thanks for the feedback.</span>';
+      ans.appendChild(fb);
+    });
+    document.querySelectorAll('.fb-btn').forEach(function (btn) {
+      if (btn.dataset.bound) return; btn.dataset.bound = '1';
+      btn.addEventListener('click', function (e) { e.preventDefault(); btn.classList.add('active'); btn.closest('.feedback').classList.add('done'); });
+    });
+  }
+  injectFeedback();
+
+  var fc = document.getElementById('floating-contact');
+  function checkScroll() { if (window.scrollY > 400) fc.classList.add('show'); else fc.classList.remove('show'); }
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  checkScroll();
+
+  // ----- I18N -----
+  var langNames = { 'en':'English', 'zh-CN':'简体中文', 'zh-TW':'繁體中文', 'es':'Español', 'fr':'Français', 'de':'Deutsch', 'ja':'日本語', 'ko':'한국어', 'pt':'Português', 'vi':'Tiếng Việt' };
+
+  function applyLang(lang) {
+    var dict = (window.I18N && window.I18N[lang]) || {};
+    document.body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      var attr = el.getAttribute('data-i18n-attr');
+      var v = dict[key];
+      if (v == null) return; // fall back to English already in HTML
+      if (attr) el.setAttribute(attr, v);
+      else el.innerHTML = v;
+    });
+    document.getElementById('lang-current').textContent = langNames[lang] || lang;
+    document.querySelectorAll('.lang-item').forEach(function (it) {
+      it.classList.toggle('active', it.dataset.lang === lang);
+    });
+    try { localStorage.setItem('pk-lang', lang); } catch (e) {}
+  }
+
+  var langBtn = document.getElementById('lang-toggle');
+  var langMenu = document.getElementById('lang-menu');
+  langBtn.addEventListener('click', function (e) { e.stopPropagation(); langMenu.classList.toggle('open'); });
+  document.addEventListener('click', function () { langMenu.classList.remove('open'); });
+  document.querySelectorAll('.lang-item').forEach(function (item) {
+    item.addEventListener('click', function (e) {
+      e.stopPropagation(); langMenu.classList.remove('open');
+      applyLang(item.dataset.lang);
+      injectFeedback(); // re-translate dynamically injected nodes
+    });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem('pk-lang'); } catch (e) {}
+  if (saved && langNames[saved]) applyLang(saved);
+
+  if (window.location.hash) {
+    var t = document.querySelector(window.location.hash);
+    if (t && t.classList && t.classList.contains('qa')) t.setAttribute('open','');
+  }
+
+  var lu = document.getElementById('last-updated');
+  if (lu) {
+    var d = new Date();
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    lu.textContent = months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+})();
+
+// =================== AI ASK ===================
+(function () {
+  var input = document.getElementById('search');
+  var card = document.getElementById('ask-card');
+  var qEl = document.getElementById('ask-q');
+  var aEl = document.getElementById('ask-answer');
+  var sourcesWrap = document.getElementById('ask-sources');
+  var sourcesList = document.getElementById('ask-sources-list');
+  var relatedWrap = document.getElementById('ask-related');
+  var relatedList = document.getElementById('ask-related-list');
+  var actions = document.getElementById('ask-actions');
+  var closeBtn = document.getElementById('ask-close');
+
+  var abortCtl = null;
+  var lastAsked = null;
+
+  // Map of qa-key -> displayed question text (built on demand from DOM, respects current language)
+  function getQText(key) {
+    var el = document.getElementById(key);
+    if (!el) return null;
+    var s = el.querySelector('summary');
+    if (!s) return null;
+    return s.firstChild ? (s.firstChild.textContent || s.textContent || '').trim() : s.textContent.trim();
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Tiny safe markdown: **bold**, *italic*, `code`, paragraphs.
+  function renderMarkdown(text) {
+    var html = escapeHtml(text);
+    html = html.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+    html = html.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    var paras = html.split(/\n\s*\n/).map(function (p) {
+      return p.trim() ? '<p>' + p.replace(/\n/g, '<br>') + '</p>' : '';
+    }).join('');
+    return paras;
+  }
+
+  function stripTags(text) {
+    // Remove the [SOURCES: ...] and [RELATED: ...] markers from displayed answer.
+    return text
+      .replace(/\n*\[SOURCES:[^\]]*\][\s\S]*$/i, '')
+      .replace(/\n*\[RELATED:[^\]]*\][\s\S]*$/i, '')
+      .trim();
+  }
+
+  function parseSources(text) {
+    var m = text.match(/\[SOURCES:\s*([^\]]+)\]/i);
+    if (!m) return [];
+    return m[1].split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function parseRelated(text) {
+    var m = text.match(/\[RELATED:\s*([^\]]+)\]/i);
+    if (!m) return [];
+    return m[1].split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  function renderAnswer(rawText, withCursor) {
+    var clean = stripTags(rawText);
+    var html = renderMarkdown(clean);
+    if (withCursor) html += '<span class="ask-cursor"></span>';
+    aEl.innerHTML = html;
+  }
+
+  function renderSources(keys) {
+    sourcesList.innerHTML = '';
+    var seen = {}; var n = 0;
+    keys.forEach(function (k) {
+      if (seen[k]) return; seen[k] = 1;
+      var qtext = getQText(k);
+      if (!qtext) return;
+      var btn = document.createElement('a');
+      btn.className = 'source-chip';
+      btn.href = '#' + k;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-4"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>' + escapeHtml(qtext) + '</span>';
+      btn.addEventListener('click', function () {
+        setTimeout(function () {
+          var el = document.getElementById(k);
+          if (el) el.setAttribute('open', '');
+        }, 100);
+      });
+      sourcesList.appendChild(btn);
+      n++;
+    });
+    if (n > 0) { sourcesWrap.hidden = false; requestAnimationFrame(function () { sourcesWrap.classList.add('show'); }); }
+  }
+
+  function renderRelated(keys) {
+    relatedList.innerHTML = '';
+    var seen = {}; var n = 0;
+    keys.forEach(function (k) {
+      if (seen[k]) return; seen[k] = 1;
+      var qtext = getQText(k);
+      if (!qtext) return;
+      var a = document.createElement('a');
+      a.className = 'related-item';
+      a.href = '#' + k;
+      a.innerHTML = '<span style="flex:1;">' + escapeHtml(qtext) + '</span><span class="arrow">→</span>';
+      a.addEventListener('click', function () {
+        setTimeout(function () {
+          var el = document.getElementById(k);
+          if (el) el.setAttribute('open', '');
+        }, 100);
+        closeCard();
+      });
+      relatedList.appendChild(a);
+      n++;
+    });
+    if (n > 0) { relatedWrap.hidden = false; requestAnimationFrame(function () { relatedWrap.classList.add('show'); }); }
+  }
+
+  function showError(msg) {
+    aEl.innerHTML = '<div class="ask-error"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>' + escapeHtml(msg) + '</span></div>';
+    card.classList.remove('thinking');
+    actions.hidden = false;
+  }
+
+  function fallbackToFilter() {
+    closeCard();
+    // Re-trigger keyword filter with current input value
+    var ev = new Event('input');
+    input.dispatchEvent(ev);
+  }
+
+  function openCard(question) {
+    lastAsked = question;
+    qEl.textContent = question;
+    aEl.innerHTML = '<div class="ask-loading"><span class="ask-spinner"></span><span data-i18n="ask.thinking">Thinking…</span></div>';
+    sourcesWrap.hidden = true; sourcesWrap.classList.remove('show'); sourcesList.innerHTML = '';
+    relatedWrap.hidden = true; relatedWrap.classList.remove('show'); relatedList.innerHTML = '';
+    actions.hidden = true; actions.classList.remove('done');
+    document.querySelectorAll('.ask-feedback-btn').forEach(function (b) { b.classList.remove('active'); });
+    card.classList.add('show');
+    card.classList.add('thinking');
+    setTimeout(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
+  }
+
+  function closeCard() {
+    if (abortCtl) { try { abortCtl.abort(); } catch (e) {} }
+    abortCtl = null;
+    card.classList.remove('show');
+    card.classList.remove('thinking');
+  }
+  closeBtn.addEventListener('click', closeCard);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && card.classList.contains('show')) {
+      closeCard();
+    }
+    // Cmd/Ctrl+K focuses search
+    if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+
+  document.querySelectorAll('.ask-feedback-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.classList.add('active');
+      actions.classList.add('done');
+      // Hook for analytics: send (lastAsked, btn.dataset.val) to your endpoint.
+    });
+  });
+
+  async function ask(question) {
+    openCard(question);
+    if (abortCtl) { try { abortCtl.abort(); } catch (e) {} }
+    abortCtl = new AbortController();
+
+    var lang = document.body.getAttribute('data-lang') || 'en';
+    var resp;
+    try {
+      resp = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ question: question, lang: lang }),
+        signal: abortCtl.signal,
+      });
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+      showError('Could not reach support. ' + (e && e.message ? e.message : ''));
+      return;
+    }
+
+    if (!resp.ok) {
+      var msg = 'Something went wrong (HTTP ' + resp.status + ').';
+      try { var j = await resp.json(); if (j && j.error) msg = j.error; } catch (e) {}
+      // If endpoint isn't deployed, gracefully fall back.
+      if (resp.status === 404 || resp.status === 405) {
+        showError('AI search isn\'t available here yet. Try the keyword filter or email support@partykeys.com.');
+      } else {
+        showError(msg);
+      }
+      return;
+    }
+    if (!resp.body) { showError('Empty response.'); return; }
+
+    var reader = resp.body.getReader();
+    var dec = new TextDecoder();
+    var buffer = '';
+    var fullText = '';
+    var firstChunk = true;
+    var lastRenderTs = 0;
+
+    function tryRender() {
+      var now = performance.now();
+      if (now - lastRenderTs < 24) return; // ~40fps cap
+      lastRenderTs = now;
+      renderAnswer(fullText, true);
+    }
+
+    try {
+      while (true) {
+        var step = await reader.read();
+        if (step.done) break;
+        buffer += dec.decode(step.value, { stream: true });
+        var lines = buffer.split('\n');
+        buffer = lines.pop();
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i].trim();
+          if (!line || !line.startsWith('data:')) continue;
+          var payload = line.slice(5).trim();
+          if (!payload || payload === '[DONE]') continue;
+          var json;
+          try { json = JSON.parse(payload); } catch (e) { continue; }
+          if (json.type === 'content_block_delta' && json.delta && json.delta.type === 'text_delta') {
+            if (firstChunk) {
+              firstChunk = false;
+              card.classList.remove('thinking');
+            }
+            fullText += json.delta.text;
+            tryRender();
+          } else if (json.type === 'message_stop') {
+            // done
+          }
+        }
+      }
+    } catch (e) {
+      if (e.name !== 'AbortError') showError('Stream interrupted.');
+      return;
+    }
+
+    // Final render (no cursor) and parse out citations
+    renderAnswer(fullText, false);
+    var sources = parseSources(fullText);
+    var related = parseRelated(fullText);
+    renderSources(sources);
+    renderRelated(related);
+    actions.hidden = false;
+    card.classList.remove('thinking');
+  }
+
+  // Submit on Enter
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      var q = input.value.trim();
+      if (q.length < 2) return;
+      e.preventDefault();
+      ask(q);
+    }
+  });
+
+  // Make popular chips ALSO trigger AI ask when clicked while pressing Shift
+  document.querySelectorAll('.chip').forEach(function (c) {
+    c.addEventListener('click', function (e) {
+      if (e.shiftKey) {
+        var q = c.dataset.q;
+        input.value = q;
+        ask(q);
+      }
+    });
+  });
+
+  // Re-translate the static AI-card labels when language switches
+  // (lang switcher in the main IIFE re-runs translation; we just expose i18n keys via data-i18n)
+})();
+</script>
+</body>
+</html>
